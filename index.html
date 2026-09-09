@@ -24,8 +24,8 @@
                             darkGold: '#B8860B'
                         },
                         islamic: {
-                            green: '#0F5132',
-                            emerald: '#198754',
+                            green: '#00875A',
+                            emerald: '#0F5132',
                             mint: '#E8F5E9'
                         }
                     },
@@ -56,7 +56,7 @@
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background: linear-gradient(135deg, #1a0205 0%, #2b050a 40%, #0d1b1e 100%);
+            background: linear-gradient(135deg, #180205 0%, #2e050b 35%, #081a17 100%);
             background-attachment: fixed;
             color: #f8fafc;
             min-height: 100vh;
@@ -84,8 +84,17 @@
             box-shadow: 0 12px 30px rgba(200, 16, 46, 0.25);
         }
 
-        .agam-gradient {
-            background: linear-gradient(135deg, #C8102E 0%, #8B0000 100%);
+        .quick-access-card {
+            background: linear-gradient(135deg, rgba(200, 16, 46, 0.15) 0%, rgba(0, 135, 90, 0.15) 100%);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .quick-access-card:hover {
+            transform: translateY(-4px);
+            border-color: #FFD700;
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.2);
         }
 
         .gold-gradient-text {
@@ -94,8 +103,13 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .gold-border {
-            border-color: rgba(255, 215, 0, 0.3);
+        .minang-pattern {
+            background-image: radial-gradient(rgba(255, 215, 0, 0.15) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+
+        .arabic-font {
+            font-family: 'Amiri', serif;
         }
 
         /* Custom Scrollbar */
@@ -113,17 +127,6 @@
             background: #FFD700;
         }
 
-        /* Minang Ornament Silhouette Banner Overlay */
-        .minang-pattern {
-            background-image: radial-gradient(rgba(255, 215, 0, 0.15) 1px, transparent 0);
-            background-size: 24px 24px;
-        }
-
-        .arabic-font {
-            font-family: 'Amiri', serif;
-        }
-
-        /* Pulsing Glow Animation */
         @keyframes pulse-glow {
             0%, 100% { box-shadow: 0 0 15px rgba(200, 16, 46, 0.4); }
             50% { box-shadow: 0 0 30px rgba(255, 215, 0, 0.6); }
@@ -140,13 +143,13 @@
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             
             <!-- Brand Logo & Title -->
-            <div class="flex items-center gap-3">
-                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-agam to-agam-dark flex items-center justify-center border border-muhammadiyah-gold/40 shadow-lg relative overflow-hidden group">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="switchView('checkin')">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-agam to-agam-dark flex items-center justify-center border border-muhammadiyah-gold/50 shadow-lg relative overflow-hidden group">
                     <i class="fa-solid fa-star-and-crescent text-2xl text-muhammadiyah-gold group-hover:rotate-45 transition-transform duration-500"></i>
                 </div>
                 <div>
                     <h1 class="text-lg md:text-xl font-bold tracking-tight text-white flex items-center gap-2">
-                        Pustaka Digital <span class="text-xs px-2 py-0.5 rounded bg-agam text-white uppercase font-semibold border border-muhammadiyah-gold/30">MTsS</span>
+                        Pustaka Digital <span class="text-xs px-2 py-0.5 rounded bg-agam text-white uppercase font-semibold border border-muhammadiyah-gold/40">MTsS</span>
                     </h1>
                     <p class="text-xs text-slate-300 font-medium">MTsS Muhammadiyah Baringin <span class="text-muhammadiyah-gold">•</span> Kab. Agam</p>
                 </div>
@@ -154,15 +157,15 @@
 
             <!-- Stats Ticker & Actions -->
             <div class="hidden md:flex items-center gap-6 text-sm">
-                <div class="flex items-center gap-2 bg-black/30 px-3 py-1.5 rounded-full border border-white/10">
+                <div class="flex items-center gap-2 bg-black/40 px-3 py-1.5 rounded-full border border-white/10">
                     <i class="fa-solid fa-users text-muhammadiyah-gold"></i>
                     <span class="text-slate-300">Pengunjung Hari Ini:</span>
                     <span id="today-visitors-count" class="font-bold text-white">0</span>
                 </div>
-                <div class="flex items-center gap-2 bg-black/30 px-3 py-1.5 rounded-full border border-white/10">
-                    <i class="fa-solid fa-book-bookmark text-emerald-400"></i>
+                <div class="flex items-center gap-2 bg-black/40 px-3 py-1.5 rounded-full border border-white/10">
+                    <i class="fa-solid fa-book-bookmark text-islamic-green"></i>
                     <span class="text-slate-300">Koleksi Kitab & Buku:</span>
-                    <span class="font-bold text-white">1,450+</span>
+                    <span class="font-bold text-white">1,500+</span>
                 </div>
             </div>
 
@@ -170,9 +173,9 @@
             <div class="flex items-center gap-2">
                 <button onclick="openSheetConfigModal()" class="px-3 py-2 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-xs font-semibold text-slate-200 border border-white/10 transition flex items-center gap-2">
                     <i class="fa-solid fa-sheet-plastic text-green-400"></i>
-                    <span class="hidden sm:inline">Integrasi Google Sheet</span>
+                    <span class="hidden sm:inline">Google Sheet Sync</span>
                 </button>
-                <button onclick="switchView('checkin')" id="checkin-btn-nav" class="px-4 py-2 rounded-lg bg-gradient-to-r from-agam to-agam-dark hover:from-agam-light hover:to-agam text-xs font-bold text-white border border-muhammadiyah-gold/40 transition flex items-center gap-2 shadow-md">
+                <button onclick="switchView('checkin')" id="checkin-btn-nav" class="px-4 py-2 rounded-lg bg-gradient-to-r from-agam via-red-600 to-agam-dark hover:from-red-600 hover:to-agam text-xs font-bold text-white border border-muhammadiyah-gold/40 transition flex items-center gap-2 shadow-md">
                     <i class="fa-solid fa-id-card"></i>
                     <span>Buku Tamu</span>
                 </button>
@@ -189,14 +192,14 @@
                 
                 <!-- Left Banner Info -->
                 <div class="md:col-span-5 space-y-6 text-center md:text-left">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-agam/30 border border-agam text-muhammadiyah-gold text-xs font-semibold">
-                        <i class="fa-solid fa-mosque"></i> Selamat Datang di Perpustakaan
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-agam/30 border border-agam text-muhammadiyah-gold text-xs font-semibold">
+                        <i class="fa-solid fa-mosque"></i> Perpustakaan Digital Berkemajuan
                     </div>
                     <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-tight text-white">
                         Gerbang Ilmu & <span class="gold-gradient-text">Peradaban Islam</span>
                     </h2>
                     <p class="text-slate-300 text-sm leading-relaxed">
-                        Silakan isi data kunjungan Anda untuk mengakses koleksi buku pelajaran, e-kitab klasik, serta portal perpustakaan dunia secara instan.
+                        Silakan isi data kunjungan Anda untuk mengakses koleksi buku pelajaran MTsS Baringin, e-kitab klasik, serta portal perpustakaan terkemuka dunia secara gratis dan serba instan.
                     </p>
                     <div class="p-4 rounded-xl glass-card border-l-4 border-l-muhammadiyah-gold text-xs text-slate-300 italic">
                         <p class="arabic-font text-lg text-muhammadiyah-gold mb-1 text-right">اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ</p>
@@ -206,7 +209,7 @@
 
                 <!-- Right Registration Card -->
                 <div class="md:col-span-7 glass-panel rounded-2xl p-6 md:p-8 relative overflow-hidden border border-white/20 shadow-2xl">
-                    <div class="absolute -top-12 -right-12 w-32 h-32 bg-agam/30 rounded-full blur-2xl"></div>
+                    <div class="absolute -top-12 -right-12 w-32 h-32 bg-agam/40 rounded-full blur-2xl"></div>
                     <div class="absolute -bottom-12 -left-12 w-32 h-32 bg-muhammadiyah-gold/20 rounded-full blur-2xl"></div>
 
                     <div class="flex items-center justify-between pb-4 mb-6 border-b border-white/10">
@@ -214,7 +217,7 @@
                             <h3 class="text-lg font-bold text-white flex items-center gap-2">
                                 <i class="fa-solid fa-user-check text-muhammadiyah-gold"></i> Buku Tamu Digital
                             </h3>
-                            <p class="text-xs text-slate-400">Pencatatan Real-Time Pengunjung Pustaka</p>
+                            <p class="text-xs text-slate-400">Pencatatan Kunjungan Real-Time Perpustakaan</p>
                         </div>
                         <span class="text-xs px-2.5 py-1 rounded-full bg-green-900/60 text-green-300 border border-green-500/30 flex items-center gap-1.5">
                             <span class="w-2 h-2 rounded-full bg-green-400 animate-ping"></span> Realtime Ready
@@ -227,7 +230,7 @@
                             <div class="relative">
                                 <i class="fa-solid fa-user absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
                                 <input type="text" id="visitor-name" required placeholder="Contoh: Muhammad Raihan, S.Pd" 
-                                    class="w-full bg-slate-900/80 border border-white/15 rounded-lg pl-10 pr-4 py-2.5 text-sm text-white focus:outline-none focus:border-muhammadiyah-gold transition">
+                                    class="w-full bg-slate-900/90 border border-white/15 rounded-lg pl-10 pr-4 py-2.5 text-sm text-white focus:outline-none focus:border-muhammadiyah-gold transition">
                             </div>
                         </div>
 
@@ -237,9 +240,9 @@
                                 <div class="relative">
                                     <i class="fa-solid fa-graduation-cap absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
                                     <select id="visitor-role" required onchange="updateIdLabel()"
-                                        class="w-full bg-slate-900/80 border border-white/15 rounded-lg pl-10 pr-4 py-2.5 text-sm text-white focus:outline-none focus:border-muhammadiyah-gold transition appearance-none">
-                                        <option value="Siswa">Siswa / Santri MTs</option>
-                                        <option value="Guru">Guru / Staf Pengajar</option>
+                                        class="w-full bg-slate-900/90 border border-white/15 rounded-lg pl-10 pr-4 py-2.5 text-sm text-white focus:outline-none focus:border-muhammadiyah-gold transition appearance-none">
+                                        <option value="Siswa MTs">Siswa / Santri MTs</option>
+                                        <option value="Guru / Staf">Guru / Staf Pengajar</option>
                                         <option value="Tamu Umum">Tamu Umum / Wali</option>
                                     </select>
                                 </div>
@@ -249,26 +252,40 @@
                                 <div class="relative">
                                     <i class="fa-solid fa-id-badge absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
                                     <input type="text" id="visitor-id" required placeholder="Masukkan nomor ID" 
-                                        class="w-full bg-slate-900/80 border border-white/15 rounded-lg pl-10 pr-4 py-2.5 text-sm text-white focus:outline-none focus:border-muhammadiyah-gold transition">
+                                        class="w-full bg-slate-900/90 border border-white/15 rounded-lg pl-10 pr-4 py-2.5 text-sm text-white focus:outline-none focus:border-muhammadiyah-gold transition">
                                 </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">Tujuan Kunjungan <span class="text-agam">*</span></label>
+                            <div class="relative">
+                                <i class="fa-solid fa-bullseye absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                                <select id="visitor-purpose" required
+                                    class="w-full bg-slate-900/90 border border-white/15 rounded-lg pl-10 pr-4 py-2.5 text-sm text-white focus:outline-none focus:border-muhammadiyah-gold transition appearance-none">
+                                    <option value="Membaca Buku Pelajaran">Membaca Buku Teks Pelajaran MTs</option>
+                                    <option value="Mengkaji Kitab & Islam">Mengkaji Kitab Kuning / Ke-Muhammadiyahan</option>
+                                    <option value="Akses Library Dunia & Digital">Akses Portal Library Dunia (WeLib, F15, Syamilah)</option>
+                                    <option value="Pencarian Tugas & Riset">Pencarian Tugas & Riset Kemenag</option>
+                                </select>
                             </div>
                         </div>
 
                         <!-- Live QR Badge Preview Trigger -->
                         <div class="pt-2 flex items-center justify-between">
-                            <button type="button" onclick="generateQRPreview()" class="text-xs text-muhammadiyah-gold hover:underline flex items-center gap-1">
-                                <i class="fa-solid fa-qrcode"></i> Pratinjau QR Code Pas Tamu
+                            <button type="button" onclick="generateQRPreview()" class="text-xs text-muhammadiyah-gold hover:underline flex items-center gap-1 font-semibold">
+                                <i class="fa-solid fa-qrcode"></i> Pratinjau QR Pas Tamu
                             </button>
                             <span id="sheet-status-indicator" class="text-[11px] text-slate-400 italic">
                                 Mode: Local & Google Sheet Sync
                             </span>
                         </div>
 
-                        <!-- QR Modal Container hidden inside form logic -->
-                        <div id="qr-preview-box" class="hidden p-4 rounded-xl bg-slate-950/80 border border-muhammadiyah-gold/40 text-center space-y-3">
-                            <p class="text-xs text-slate-300 font-semibold">QR Code Akses Tamu Anda:</p>
-                            <div id="qrcode-target" class="flex justify-center p-2 bg-white rounded-lg inline-block mx-auto"></div>
-                            <p class="text-[10px] text-slate-400">Simpan atau tunjukkan QR ini ke pustakawan jika diperlukan</p>
+                        <!-- QR Preview Box Container -->
+                        <div id="qr-preview-box" class="hidden p-4 rounded-xl bg-slate-950/90 border border-muhammadiyah-gold/40 text-center space-y-3">
+                            <p class="text-xs text-slate-300 font-semibold">QR Code Akses Masuk Tamu Anda:</p>
+                            <div id="qrcode-target" class="p-2 bg-white rounded-lg inline-block mx-auto shadow-md"></div>
+                            <p class="text-[10px] text-slate-400">Simpan atau tunjukkan QR ini ke pustakawan sekolah</p>
                         </div>
 
                         <button type="submit" class="w-full py-3 px-6 rounded-xl bg-gradient-to-r from-agam via-red-600 to-agam-dark hover:from-red-600 hover:to-agam text-white font-bold text-sm tracking-wide shadow-lg border border-muhammadiyah-gold/40 transition transform active:scale-[0.98] flex items-center justify-center gap-2">
@@ -280,11 +297,11 @@
             </div>
         </section>
 
-        <!-- VIEW 2: MAIN LIBRARY DASHBOARD (Hidden initially or toggled) -->
+        <!-- VIEW 2: MAIN LIBRARY DASHBOARD -->
         <section id="dashboard-view" class="hidden space-y-8 py-4">
 
             <!-- Hero Welcome Banner -->
-            <div class="relative rounded-2xl glass-panel overflow-hidden border border-white/15 p-6 md:p-8 bg-gradient-to-r from-agam-dark/80 via-slate-900/90 to-slate-950">
+            <div class="relative rounded-2xl glass-panel overflow-hidden border border-white/15 p-6 md:p-8 bg-gradient-to-r from-agam-dark/90 via-slate-900/90 to-slate-950">
                 <div class="absolute right-0 top-0 bottom-0 w-1/3 opacity-10 bg-repeat minang-pattern pointer-events-none"></div>
                 <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
                     <div class="space-y-2 text-center md:text-left">
@@ -295,7 +312,7 @@
                             Selamat Datang, <span id="active-user-name" class="gold-gradient-text">Tamu Terhormat</span>
                         </h2>
                         <p class="text-xs md:text-sm text-slate-300 max-w-2xl">
-                            Nikmati akses tanpa batas ke bahan ajar MTsS Muhammadiyah Baringin, karya ilmiah Kemuhammadiyahan, serta jejaring koleksi kitab kuning digital dunia.
+                            Nikmati akses tanpa batas ke bahan ajar MTsS Muhammadiyah Baringin, karya ilmiah Kemuhammadiyahan, serta jejaring perpustakaan digital terkemuka nasional & internasional.
                         </p>
                     </div>
 
@@ -304,10 +321,114 @@
                         <span class="text-[10px] uppercase tracking-wider text-slate-400 block mb-1">Status Pengunjung</span>
                         <div id="active-user-role" class="text-sm font-bold text-muhammadiyah-gold">Siswa MTs</div>
                         <div id="active-user-id" class="text-xs text-slate-300 font-mono">ID: -</div>
-                        <button onclick="switchView('checkin')" class="mt-3 text-xs text-red-400 hover:text-red-300 underline font-medium">
+                        <button onclick="switchView('checkin')" class="mt-3 text-xs text-red-400 hover:text-red-300 underline font-medium flex items-center gap-1 justify-center md:justify-end">
                             <i class="fa-solid fa-right-from-bracket"></i> Ganti Pengunjung
                         </button>
                     </div>
+                </div>
+            </div>
+
+            <!-- FEATURED 1-CLICK QUICK ACCESS BANNER & CARDS -->
+            <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-base md:text-lg font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-bolt text-muhammadiyah-gold"></i> Akses Cepat 1-Klik Portal Terkemuka
+                    </h3>
+                    <span class="text-xs text-slate-400 hidden sm:inline">Langsung terhubung ke jejaring e-library pilihan</span>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                    
+                    <!-- Quick Card 1: WeLib -->
+                    <a href="https://welib.org/" target="_blank" class="quick-access-card rounded-xl p-4 flex flex-col justify-between group">
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="w-9 h-9 rounded-lg bg-blue-600/30 text-blue-400 flex items-center justify-center font-bold text-base border border-blue-400/40">
+                                    <i class="fa-solid fa-globe"></i>
+                                </span>
+                                <span class="text-[9px] uppercase tracking-wider font-extrabold px-2 py-0.5 rounded bg-blue-900/60 text-blue-300 border border-blue-500/30">1-Klik Akses</span>
+                            </div>
+                            <h4 class="text-sm font-bold text-white group-hover:text-muhammadiyah-gold transition">WeLib Library</h4>
+                            <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed">Platform perpustakaan digital & koleksi literatur internasional terintegrasi.</p>
+                        </div>
+                        <div class="mt-3 pt-2 border-t border-white/10 flex items-center justify-between text-[11px] text-muhammadiyah-gold font-bold">
+                            <span>Buka welib.org</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square group-hover:translate-x-0.5 transition"></i>
+                        </div>
+                    </a>
+
+                    <!-- Quick Card 2: F15 Library -->
+                    <a href="https://f15library.com/" target="_blank" class="quick-access-card rounded-xl p-4 flex flex-col justify-between group">
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="w-9 h-9 rounded-lg bg-purple-600/30 text-purple-400 flex items-center justify-center font-bold text-base border border-purple-400/40">
+                                    <i class="fa-solid fa-book-atlas"></i>
+                                </span>
+                                <span class="text-[9px] uppercase tracking-wider font-extrabold px-2 py-0.5 rounded bg-purple-900/60 text-purple-300 border border-purple-500/30">1-Klik Akses</span>
+                            </div>
+                            <h4 class="text-sm font-bold text-white group-hover:text-muhammadiyah-gold transition">F15 Library</h4>
+                            <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed">Repositori buku digital modern dengan katalog referensi terlengkap.</p>
+                        </div>
+                        <div class="mt-3 pt-2 border-t border-white/10 flex items-center justify-between text-[11px] text-muhammadiyah-gold font-bold">
+                            <span>Buka f15library.com</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square group-hover:translate-x-0.5 transition"></i>
+                        </div>
+                    </a>
+
+                    <!-- Quick Card 3: Maktabah Syamilah -->
+                    <a href="https://shamela.ws/" target="_blank" class="quick-access-card rounded-xl p-4 flex flex-col justify-between group">
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="w-9 h-9 rounded-lg bg-emerald-600/30 text-emerald-400 flex items-center justify-center font-bold text-base border border-emerald-400/40">
+                                    <i class="fa-solid fa-book-quran"></i>
+                                </span>
+                                <span class="text-[9px] uppercase tracking-wider font-extrabold px-2 py-0.5 rounded bg-emerald-900/60 text-emerald-300 border border-emerald-500/30">Kitab Kuning</span>
+                            </div>
+                            <h4 class="text-sm font-bold text-white group-hover:text-muhammadiyah-gold transition">Maktabah Syamilah</h4>
+                            <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed">Perpustakaan digital puluhan ribu kitab klasik fiqih, tafsir, & hadits.</p>
+                        </div>
+                        <div class="mt-3 pt-2 border-t border-white/10 flex items-center justify-between text-[11px] text-muhammadiyah-gold font-bold">
+                            <span>Buka shamela.ws</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square group-hover:translate-x-0.5 transition"></i>
+                        </div>
+                    </a>
+
+                    <!-- Quick Card 4: Perpusnas RI -->
+                    <a href="https://perpusnas.go.id/" target="_blank" class="quick-access-card rounded-xl p-4 flex flex-col justify-between group">
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="w-9 h-9 rounded-lg bg-amber-600/30 text-amber-400 flex items-center justify-center font-bold text-base border border-amber-400/40">
+                                    <i class="fa-solid fa-building-columns"></i>
+                                </span>
+                                <span class="text-[9px] uppercase tracking-wider font-extrabold px-2 py-0.5 rounded bg-amber-900/60 text-amber-300 border border-amber-500/30">Nasional RI</span>
+                            </div>
+                            <h4 class="text-sm font-bold text-white group-hover:text-muhammadiyah-gold transition">Perpusnas RI</h4>
+                            <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed">Portal resmi Perpustakaan Nasional Republik Indonesia & e-Pusnas.</p>
+                        </div>
+                        <div class="mt-3 pt-2 border-t border-white/10 flex items-center justify-between text-[11px] text-muhammadiyah-gold font-bold">
+                            <span>Buka perpusnas.go.id</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square group-hover:translate-x-0.5 transition"></i>
+                        </div>
+                    </a>
+
+                    <!-- Quick Card 5: Maktabah Waqfeya -->
+                    <a href="https://waqfeya.net/" target="_blank" class="quick-access-card rounded-xl p-4 flex flex-col justify-between group">
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="w-9 h-9 rounded-lg bg-red-600/30 text-red-400 flex items-center justify-center font-bold text-base border border-red-400/40">
+                                    <i class="fa-solid fa-box-archive"></i>
+                                </span>
+                                <span class="text-[9px] uppercase tracking-wider font-extrabold px-2 py-0.5 rounded bg-red-900/60 text-red-300 border border-red-500/30">Scan PDF Kitab</span>
+                            </div>
+                            <h4 class="text-sm font-bold text-white group-hover:text-muhammadiyah-gold transition">Maktabah Waqfeya</h4>
+                            <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed">Repositori raksasa scan naskah asli kitab turats mu'tabar PDF.</p>
+                        </div>
+                        <div class="mt-3 pt-2 border-t border-white/10 flex items-center justify-between text-[11px] text-muhammadiyah-gold font-bold">
+                            <span>Buka waqfeya.net</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square group-hover:translate-x-0.5 transition"></i>
+                        </div>
+                    </a>
+
                 </div>
             </div>
 
@@ -317,13 +438,13 @@
                     <i class="fa-solid fa-book-open"></i> Katalog Buku MTs & Islam
                 </button>
                 <button onclick="switchTab('portals')" id="tab-btn-portals" class="tab-btn px-5 py-2.5 rounded-xl font-semibold text-xs sm:text-sm text-slate-300 hover:text-white hover:bg-white/10 transition flex items-center gap-2 border border-transparent">
-                    <i class="fa-solid fa-globe"></i> Perpustakaan Dunia & Nasional
+                    <i class="fa-solid fa-globe"></i> Direktori Perpustakaan Dunia
                 </button>
                 <button onclick="switchTab('media')" id="tab-btn-media" class="tab-btn px-5 py-2.5 rounded-xl font-semibold text-xs sm:text-sm text-slate-300 hover:text-white hover:bg-white/10 transition flex items-center gap-2 border border-transparent">
-                    <i class="fa-solid fa-circle-play text-red-500"></i> Kajian & Ceramah Agama
+                    <i class="fa-solid fa-circle-play text-red-500"></i> Kajian Agama YouTube
                 </button>
                 <button onclick="switchTab('logs')" id="tab-btn-logs" class="tab-btn px-5 py-2.5 rounded-xl font-semibold text-xs sm:text-sm text-slate-300 hover:text-white hover:bg-white/10 transition flex items-center gap-2 border border-transparent">
-                    <i class="fa-solid fa-list-check"></i> Log Pengunjung Real-time
+                    <i class="fa-solid fa-list-check"></i> Log Real-Time Pengunjung
                 </button>
             </div>
 
@@ -342,10 +463,11 @@
                     <!-- Category Pills -->
                     <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
                         <button onclick="setCategoryFilter('all')" class="cat-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-muhammadiyah-gold text-slate-950 border border-muhammadiyah-gold">Semua</button>
+                        <button onclick="setCategoryFilter('mts')" class="cat-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 border border-white/10">Buku Siswa MTs</button>
+                        <button onclick="setCategoryFilter('guru')" class="cat-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 border border-white/10">Panduan Guru</button>
                         <button onclick="setCategoryFilter('kemuhammadiyahan')" class="cat-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 border border-white/10">Kemuhammadiyahan</button>
-                        <button onclick="setCategoryFilter('mts')" class="cat-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 border border-white/10">Pelajaran MTs</button>
                         <button onclick="setCategoryFilter('kitab')" class="cat-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 border border-white/10">Turats / Kitab</button>
-                        <button onclick="setCategoryFilter('motivasi')" class="cat-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 border border-white/10">Sastra & Motivasi</button>
+                        <button onclick="setCategoryFilter('favorit')" class="cat-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 border border-white/10"><i class="fa-solid fa-heart text-red-500"></i> Favorit</button>
                     </div>
                 </div>
 
@@ -358,14 +480,58 @@
             <!-- TAB CONTENT 2: WORLD & NATIONAL LIBRARY PORTALS -->
             <div id="tab-content-portals" class="tab-pane hidden space-y-6">
                 <div class="text-center max-w-2xl mx-auto space-y-2 mb-8">
-                    <h3 class="text-xl md:text-2xl font-bold text-white">Portal Perpustakaan Digital Terkemuka</h3>
+                    <h3 class="text-xl md:text-2xl font-bold text-white">Direktori Perpustakaan Digital Terkemuka</h3>
                     <p class="text-xs md:text-sm text-slate-300">
-                        Akses langsung ke jaringan khazanah ilmu nasional dan internasional terpercaya, termasuk perpustakaan kitab klasik terbesar di dunia Islam.
+                        Akses jaringan khazanah ilmu nasional dan internasional terpercaya, termasuk perpustakaan digital global dan kitab klasik Islam.
                     </p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     
+                    <!-- WeLib Portal Card -->
+                    <div class="glass-card rounded-2xl p-6 border border-white/15 hover:border-muhammadiyah-gold flex flex-col justify-between space-y-4 relative group">
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <div class="w-12 h-12 rounded-xl bg-blue-900/60 border border-blue-500/40 flex items-center justify-center text-blue-400 text-2xl font-bold">
+                                    <i class="fa-solid fa-globe"></i>
+                                </div>
+                                <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-blue-950 text-blue-300 border border-blue-800">
+                                    Global Digital
+                                </span>
+                            </div>
+                            <h4 class="text-lg font-bold text-white group-hover:text-muhammadiyah-gold transition">WeLib Digital Library</h4>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                Platform perpustakaan digital internasional interaktif yang menyediakan koleksi literatur multi-disiplin ilmu secara instan.
+                            </p>
+                        </div>
+                        <a href="https://welib.org/" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-blue-800/80 hover:bg-blue-700 text-white font-semibold text-xs text-center border border-blue-500/30 transition flex items-center justify-center gap-2">
+                            <span>Akses Portal WeLib</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </div>
+
+                    <!-- F15 Library Card -->
+                    <div class="glass-card rounded-2xl p-6 border border-white/15 hover:border-muhammadiyah-gold flex flex-col justify-between space-y-4 relative group">
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <div class="w-12 h-12 rounded-xl bg-purple-900/60 border border-purple-500/40 flex items-center justify-center text-purple-400 text-2xl font-bold">
+                                    <i class="fa-solid fa-book-atlas"></i>
+                                </div>
+                                <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-purple-950 text-purple-300 border border-purple-800">
+                                    Repositori Modern
+                                </span>
+                            </div>
+                            <h4 class="text-lg font-bold text-white group-hover:text-muhammadiyah-gold transition">F15 Library Portal</h4>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                Portal perpustakaan digital yang menyajikan katalog referensi buku, jurnal, dan naskah ilmiah digital terkini.
+                            </p>
+                        </div>
+                        <a href="https://f15library.com/" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-purple-800/80 hover:bg-purple-700 text-white font-semibold text-xs text-center border border-purple-500/30 transition flex items-center justify-center gap-2">
+                            <span>Akses Portal F15</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </div>
+
                     <!-- Maktabah Syamilah -->
                     <div class="glass-card rounded-2xl p-6 border border-white/15 hover:border-muhammadiyah-gold flex flex-col justify-between space-y-4 relative group">
                         <div class="space-y-3">
@@ -379,7 +545,7 @@
                             </div>
                             <h4 class="text-lg font-bold text-white group-hover:text-muhammadiyah-gold transition">Maktabah Syamilah (المكتبة الشاملة)</h4>
                             <p class="text-xs text-slate-300 leading-relaxed">
-                                Perpustakaan digital kitab kuning terbesar berisi puluhan ribu kitab fiqih, tafsir, hadits, aqidah, dan sejarah Islam secara merdeka & ilmiah.
+                                Perpustakaan digital kitab kuning terbesar berisi puluhan ribu kitab fiqih, tafsir, hadits, aqidah, dan sejarah Islam.
                             </p>
                         </div>
                         <a href="https://shamela.ws" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-emerald-800/80 hover:bg-emerald-700 text-white font-semibold text-xs text-center border border-emerald-500/30 transition flex items-center justify-center gap-2">
@@ -388,24 +554,24 @@
                         </a>
                     </div>
 
-                    <!-- e-Pusnas -->
+                    <!-- e-Pusnas / Perpusnas RI -->
                     <div class="glass-card rounded-2xl p-6 border border-white/15 hover:border-muhammadiyah-gold flex flex-col justify-between space-y-4 relative group">
                         <div class="space-y-3">
                             <div class="flex items-center justify-between">
-                                <div class="w-12 h-12 rounded-xl bg-blue-900/60 border border-blue-500/40 flex items-center justify-center text-blue-400 text-2xl font-bold">
+                                <div class="w-12 h-12 rounded-xl bg-amber-900/60 border border-amber-500/40 flex items-center justify-center text-amber-400 text-2xl font-bold">
                                     <i class="fa-solid fa-building-columns"></i>
                                 </div>
-                                <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-blue-950 text-blue-300 border border-blue-800">
+                                <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-amber-950 text-amber-300 border border-amber-800">
                                     Nasional RI
                                 </span>
                             </div>
-                            <h4 class="text-lg font-bold text-white group-hover:text-muhammadiyah-gold transition">e-Pusnas (Perpusnas RI)</h4>
+                            <h4 class="text-lg font-bold text-white group-hover:text-muhammadiyah-gold transition">Perpustakaan Nasional RI (Perpusnas)</h4>
                             <p class="text-xs text-slate-300 leading-relaxed">
-                                Layanan perpustakaan digital resmi Perpustakaan Nasional Republik Indonesia dengan koleksi ratusan ribu judul buku elektronik gratis.
+                                Layanan perpustakaan digital resmi RI dengan koleksi ratusan ribu judul buku elektronik dan jurnal ilmiah gratis.
                             </p>
                         </div>
-                        <a href="https://e-pusnas.perpusnas.go.id" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-blue-800/80 hover:bg-blue-700 text-white font-semibold text-xs text-center border border-blue-500/30 transition flex items-center justify-center gap-2">
-                            <span>Buka e-Pusnas RI</span>
+                        <a href="https://perpusnas.go.id" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-amber-800/80 hover:bg-amber-700 text-white font-semibold text-xs text-center border border-amber-500/30 transition flex items-center justify-center gap-2">
+                            <span>Buka Perpusnas RI</span>
                             <i class="fa-solid fa-arrow-up-right-from-square"></i>
                         </a>
                     </div>
@@ -414,25 +580,25 @@
                     <div class="glass-card rounded-2xl p-6 border border-white/15 hover:border-muhammadiyah-gold flex flex-col justify-between space-y-4 relative group">
                         <div class="space-y-3">
                             <div class="flex items-center justify-between">
-                                <div class="w-12 h-12 rounded-xl bg-amber-900/60 border border-amber-500/40 flex items-center justify-center text-amber-400 text-2xl font-bold">
+                                <div class="w-12 h-12 rounded-xl bg-red-900/60 border border-red-500/40 flex items-center justify-center text-red-400 text-2xl font-bold">
                                     <i class="fa-solid fa-box-archive"></i>
                                 </div>
-                                <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-amber-950 text-amber-300 border border-amber-800">
-                                    Arsip Kitab PDF
+                                <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-red-950 text-red-300 border border-red-800">
+                                    Arsip PDF Kitab
                                 </span>
                             </div>
                             <h4 class="text-lg font-bold text-white group-hover:text-muhammadiyah-gold transition">Maktabah Waqfeya (المكتبة الوقفية)</h4>
                             <p class="text-xs text-slate-300 leading-relaxed">
-                                Repositori raksasa berkas scan PDF asli kitab-kitab turats mu'tabar lengkap dengan tahqiq dari naskah manuskrip langka.
+                                Repositori berkas scan PDF asli kitab-kitab turats mu'tabar lengkap dengan tahqiq dari naskah manuskrip langka.
                             </p>
                         </div>
-                        <a href="https://waqfeya.net" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-amber-800/80 hover:bg-amber-700 text-white font-semibold text-xs text-center border border-amber-500/30 transition flex items-center justify-center gap-2">
+                        <a href="https://waqfeya.net" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-red-800/80 hover:bg-red-700 text-white font-semibold text-xs text-center border border-red-500/30 transition flex items-center justify-center gap-2">
                             <span>Buka Portal Waqfeya</span>
                             <i class="fa-solid fa-arrow-up-right-from-square"></i>
                         </a>
                     </div>
 
-                    <!-- Perpustakaan Digital Kemenag -->
+                    <!-- Pustaka Kemenag -->
                     <div class="glass-card rounded-2xl p-6 border border-white/15 hover:border-muhammadiyah-gold flex flex-col justify-between space-y-4 relative group">
                         <div class="space-y-3">
                             <div class="flex items-center justify-between">
@@ -445,55 +611,11 @@
                             </div>
                             <h4 class="text-lg font-bold text-white group-hover:text-muhammadiyah-gold transition">Pustaka Digital Kemenag RI</h4>
                             <p class="text-xs text-slate-300 leading-relaxed">
-                                Pusat buku teks pelajaran Madrasah (MTs/MA/MI), kurikulum MERDEKA Kemenag, jurnal keislaman, serta literasi riset studi Islam.
+                                Pusat buku teks pelajaran Madrasah (MTs/MA/MI), Kurikulum Merdeka Kemenag, serta riset studi Islam.
                             </p>
                         </div>
                         <a href="https://pustakadigital.kemenag.go.id" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-teal-800/80 hover:bg-teal-700 text-white font-semibold text-xs text-center border border-teal-500/30 transition flex items-center justify-center gap-2">
                             <span>Akses Pustaka Kemenag</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                        </a>
-                    </div>
-
-                    <!-- Portal Perpustakaan Perguruan Tinggi Muhammadiyah -->
-                    <div class="glass-card rounded-2xl p-6 border border-white/15 hover:border-muhammadiyah-gold flex flex-col justify-between space-y-4 relative group">
-                        <div class="space-y-3">
-                            <div class="flex items-center justify-between">
-                                <div class="w-12 h-12 rounded-xl bg-agam-dark border border-muhammadiyah-gold/40 flex items-center justify-center text-muhammadiyah-gold text-2xl font-bold">
-                                    <i class="fa-solid fa-sun"></i>
-                                </div>
-                                <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-red-950 text-muhammadiyah-gold border border-red-800">
-                                    Muhammadiyah
-                                </span>
-                            </div>
-                            <h4 class="text-lg font-bold text-white group-hover:text-muhammadiyah-gold transition">Jejaring Perpustakaan PTM</h4>
-                            <p class="text-xs text-slate-300 leading-relaxed">
-                                Konsorsium repositori ilmiah dan jurnal riset dari universitas serta institut Muhammadiyah se-Indonesia.
-                            </p>
-                        </div>
-                        <a href="https://muhammadiyah.or.id" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-agam hover:bg-agam-light text-white font-semibold text-xs text-center border border-muhammadiyah-gold/40 transition flex items-center justify-center gap-2">
-                            <span>Portal Riset Muhammadiyah</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                        </a>
-                    </div>
-
-                    <!-- Dar al-Ifta Al-Misriyyah -->
-                    <div class="glass-card rounded-2xl p-6 border border-white/15 hover:border-muhammadiyah-gold flex flex-col justify-between space-y-4 relative group">
-                        <div class="space-y-3">
-                            <div class="flex items-center justify-between">
-                                <div class="w-12 h-12 rounded-xl bg-indigo-900/60 border border-indigo-500/40 flex items-center justify-center text-indigo-400 text-2xl font-bold">
-                                    <i class="fa-solid fa-scale-balanced"></i>
-                                </div>
-                                <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-indigo-950 text-indigo-300 border border-indigo-800">
-                                    Fatwa Online
-                                </span>
-                            </div>
-                            <h4 class="text-lg font-bold text-white group-hover:text-muhammadiyah-gold transition">Dar Al-Ifta Al-Misriyyah</h4>
-                            <p class="text-xs text-slate-300 leading-relaxed">
-                                Ensiklopedi pertimbangan hukum fiqih kontemporer dan arsip kajian keislaman terpercaya dunia internasional.
-                            </p>
-                        </div>
-                        <a href="https://www.dar-alifta.org" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-indigo-800/80 hover:bg-indigo-700 text-white font-semibold text-xs text-center border border-indigo-500/30 transition flex items-center justify-center gap-2">
-                            <span>Buka Dar Al-Ifta</span>
                             <i class="fa-solid fa-arrow-up-right-from-square"></i>
                         </a>
                     </div>
@@ -504,9 +626,9 @@
             <!-- TAB CONTENT 3: ISLAMIC LECTURES & MEDIA -->
             <div id="tab-content-media" class="tab-pane hidden space-y-6">
                 <div class="text-center max-w-2xl mx-auto space-y-2 mb-8">
-                    <h3 class="text-xl md:text-2xl font-bold text-white">Media Ceramah & Kajian Muhammadiyah</h3>
+                    <h3 class="text-xl md:text-2xl font-bold text-white">Media Ceramah & Kajian Agama</h3>
                     <p class="text-xs md:text-sm text-slate-300">
-                        Kumpulan ceramah, pembahasan HPT, ilmu tajwid, dan kajian Islam mencerahkan pilihan untuk civitas akademika MTsS Muhammadiyah Baringin.
+                        Kumpulan ceramah, pembahasan HPT Muhammadiyah, ilmu tajwid, dan kajian mencerahkan untuk warga MTsS Muhammadiyah Baringin.
                     </p>
                 </div>
 
@@ -517,15 +639,15 @@
                         <div class="relative">
                             <img src="https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?auto=format&fit=crop&w=600&q=80" class="w-full h-44 object-cover">
                             <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
-                                <button onclick="playYoutubeModal('https://www.youtube.com/embed/dQw4w9WgXcQ')" class="w-12 h-12 rounded-full bg-agam text-white text-xl flex items-center justify-center shadow-lg hover:scale-110 transition">
+                                <button onclick="playYoutubeModal('https://www.youtube.com/embed/videoseries?list=PL_T-0aT3K_01234')" class="w-12 h-12 rounded-full bg-agam text-white text-xl flex items-center justify-center shadow-lg hover:scale-110 transition">
                                     <i class="fa-solid fa-play ml-1"></i>
                                 </button>
                             </div>
-                            <span class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-black/80 text-[10px] text-white font-mono">18:45</span>
+                            <span class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-black/80 text-[10px] text-white font-mono">Tarjih Muhammadiyah</span>
                         </div>
                         <div class="p-4 space-y-2">
                             <span class="text-[10px] font-bold text-muhammadiyah-gold uppercase">Majelis Tarjih & Tajdid</span>
-                            <h4 class="text-sm font-bold text-white line-clamp-2">Kajian Himpunan Putusan Tarjih (HPT): Tuntunan Shalat Khusyu' & Sesuai Sunnah</h4>
+                            <h4 class="text-sm font-bold text-white line-clamp-2">Kajian Himpunan Putusan Tarjih (HPT): Tuntunan Shalat Khusyu' Sesuai Sunnah</h4>
                             <p class="text-xs text-slate-400">Narasumber: Majelis Tarjih PP Muhammadiyah</p>
                         </div>
                     </div>
@@ -535,15 +657,15 @@
                         <div class="relative">
                             <img src="https://images.unsplash.com/photo-1542816417-0983cbe82752?auto=format&fit=crop&w=600&q=80" class="w-full h-44 object-cover">
                             <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
-                                <button onclick="playYoutubeModal('https://www.youtube.com/embed/dQw4w9WgXcQ')" class="w-12 h-12 rounded-full bg-agam text-white text-xl flex items-center justify-center shadow-lg hover:scale-110 transition">
+                                <button onclick="playYoutubeModal('https://www.youtube.com/embed/videoseries?list=PL_T-0aT3K_01234')" class="w-12 h-12 rounded-full bg-agam text-white text-xl flex items-center justify-center shadow-lg hover:scale-110 transition">
                                     <i class="fa-solid fa-play ml-1"></i>
                                 </button>
                             </div>
-                            <span class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-black/80 text-[10px] text-white font-mono">25:10</span>
+                            <span class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-black/80 text-[10px] text-white font-mono">Sejarah Minang</span>
                         </div>
                         <div class="p-4 space-y-2">
-                            <span class="text-[10px] font-bold text-emerald-400 uppercase">Sejarah Islam Minang</span>
-                            <h4 class="text-sm font-bold text-white line-clamp-2">Jejak Perjuangan Muhammadiyah di Kabupaten Agam & Ranah Minang</h4>
+                            <span class="text-[10px] font-bold text-islamic-green uppercase">Sejarah Islam Agam</span>
+                            <h4 class="text-sm font-bold text-white line-clamp-2">Jejak Perjuangan Muhammadiyah & Ulama Besar di Kab. Agam Minangkabau</h4>
                             <p class="text-xs text-slate-400">Narasumber: Lembaga Pustaka & Informasi Agam</p>
                         </div>
                     </div>
@@ -553,16 +675,16 @@
                         <div class="relative">
                             <img src="https://images.unsplash.com/photo-1590076175571-4b5459efb08c?auto=format&fit=crop&w=600&q=80" class="w-full h-44 object-cover">
                             <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
-                                <button onclick="playYoutubeModal('https://www.youtube.com/embed/dQw4w9WgXcQ')" class="w-12 h-12 rounded-full bg-agam text-white text-xl flex items-center justify-center shadow-lg hover:scale-110 transition">
+                                <button onclick="playYoutubeModal('https://www.youtube.com/embed/videoseries?list=PL_T-0aT3K_01234')" class="w-12 h-12 rounded-full bg-agam text-white text-xl flex items-center justify-center shadow-lg hover:scale-110 transition">
                                     <i class="fa-solid fa-play ml-1"></i>
                                 </button>
                             </div>
-                            <span class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-black/80 text-[10px] text-white font-mono">14:02</span>
+                            <span class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-black/80 text-[10px] text-white font-mono">Motivasi MTs</span>
                         </div>
                         <div class="p-4 space-y-2">
-                            <span class="text-[10px] font-bold text-blue-400 uppercase">Motivasi Belajar MTs</span>
+                            <span class="text-[10px] font-bold text-blue-400 uppercase">Kajian Tematik Pelajar</span>
                             <h4 class="text-sm font-bold text-white line-clamp-2">Adab Menuntut Ilmu Menurut Kitab Adabul 'Alim Wal Muta'allim</h4>
-                            <p class="text-xs text-slate-400">Kajian Tematik Pelajar Muhammadiyah</p>
+                            <p class="text-xs text-slate-400">Pustaka Islami Remaja Baringin</p>
                         </div>
                     </div>
 
@@ -576,17 +698,17 @@
                     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-4">
                         <div>
                             <h3 class="text-lg font-bold text-white flex items-center gap-2">
-                                <i class="fa-solid fa-clock-rotate-left text-muhammadiyah-gold"></i> Rekap Data Pengunjung Real-Time
+                                <i class="fa-solid fa-clock-rotate-left text-muhammadiyah-gold"></i> Rekap Log Pengunjung Real-Time
                             </h3>
-                            <p class="text-xs text-slate-400">Tercatat secara otomatis di sistem lokal dan Google Sheets</p>
+                            <p class="text-xs text-slate-400">Tercatat secara otomatis di sistem lokal dan Google Sheets Webhook</p>
                         </div>
 
                         <div class="flex items-center gap-3">
                             <button onclick="exportVisitorCSV()" class="px-3.5 py-2 rounded-lg bg-emerald-700 hover:bg-emerald-600 text-xs font-bold text-white transition flex items-center gap-2 shadow">
-                                <i class="fa-solid fa-file-excel"></i> Ekspor CSV / Excel
+                                <i class="fa-solid fa-file-excel"></i> Ekspor CSV
                             </button>
                             <button onclick="clearVisitorLog()" class="px-3.5 py-2 rounded-lg bg-red-950/80 hover:bg-red-900 text-xs font-bold text-red-300 border border-red-800 transition">
-                                <i class="fa-solid fa-trash-can"></i> Bersihkan Log
+                                <i class="fa-solid fa-trash-can"></i> Hapus Log
                             </button>
                         </div>
                     </div>
@@ -600,7 +722,8 @@
                                     <th class="px-4 py-3">Nama Pengunjung</th>
                                     <th class="px-4 py-3">Status</th>
                                     <th class="px-4 py-3">ID / NISN / NIP</th>
-                                    <th class="px-4 py-3 text-center">Status Sync Google Sheet</th>
+                                    <th class="px-4 py-3">Tujuan Kunjungan</th>
+                                    <th class="px-4 py-3 text-center">Status Sync</th>
                                 </tr>
                             </thead>
                             <tbody id="visitor-log-tbody" class="divide-y divide-white/5">
@@ -629,8 +752,9 @@
                     </div>
                 </div>
                 <div class="flex items-center gap-2">
-                    <button onclick="toggleSpeech()" id="speech-btn" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 border border-white/10">
-                        <i class="fa-solid fa-volume-high text-muhammadiyah-gold"></i> Baca Suara
+                    <button onclick="toggleSpeech()" id="speech-btn" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 border border-white/10 flex items-center gap-1.5">
+                        <i class="fa-solid fa-volume-high text-muhammadiyah-gold"></i>
+                        <span>Baca Suara</span>
                     </button>
                     <button onclick="closeReaderModal()" class="w-8 h-8 rounded-lg bg-red-900/60 hover:bg-red-800 text-white flex items-center justify-center">
                         <i class="fa-solid fa-xmark"></i>
@@ -646,7 +770,7 @@
             <!-- Reader Footer Bar -->
             <div class="p-3 bg-slate-900/90 border-t border-white/10 flex items-center justify-between text-xs text-slate-400">
                 <span>Perpustakaan Digital MTsS Muhammadiyah Baringin</span>
-                <span class="font-mono">Halaman Simulator E-Book</span>
+                <span class="font-mono">Simulator Pembaca Digital</span>
             </div>
         </div>
     </div>
@@ -668,7 +792,7 @@
         <div class="glass-panel w-full max-w-lg rounded-2xl border border-white/20 p-6 space-y-4">
             <div class="flex items-center justify-between border-b border-white/10 pb-3">
                 <h3 class="text-base font-bold text-white flex items-center gap-2">
-                    <i class="fa-solid fa-file-csv text-green-400"></i> Pengaturan Webhook Google Sheets
+                    <i class="fa-solid fa-file-csv text-green-400"></i> Integrasi Google Sheet Real-Time
                 </h3>
                 <button onclick="closeSheetConfigModal()" class="text-slate-400 hover:text-white">
                     <i class="fa-solid fa-xmark"></i>
@@ -676,7 +800,7 @@
             </div>
 
             <p class="text-xs text-slate-300 leading-relaxed">
-                Masukkan URL WebApp Google Apps Script Anda agar setiap pengunjung yang check-in dikirimkan datanya secara real-time ke Google Sheet milik perpustakaan sekolah.
+                Masukkan URL WebApp Google Apps Script Anda agar setiap tamu/pengunjung yang check-in dikirimkan datanya secara otomatis ke Google Sheet perpustakaan.
             </p>
 
             <div>
@@ -685,13 +809,13 @@
                     class="w-full bg-slate-900 border border-white/15 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-muhammadiyah-gold">
             </div>
 
-            <!-- Code snippet snippet helper -->
+            <!-- Code snippet helper -->
             <div class="p-3 bg-slate-950 rounded-lg text-[11px] text-slate-400 font-mono space-y-1">
                 <p class="text-muhammadiyah-gold font-bold">Kode Google Apps Script (doPost):</p>
                 <pre class="overflow-x-auto p-1 bg-black/50 rounded">function doPost(e) {
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
   var d = JSON.parse(e.postData.contents);
-  sheet.appendRow([new Date(), d.nama, d.status, d.idNumber]);
+  sheet.appendRow([new Date(), d.name, d.role, d.idNum, d.purpose]);
   return ContentService.createTextOutput("OK");
 }</pre>
             </div>
@@ -704,12 +828,12 @@
     </div>
 
     <!-- FOOTER -->
-    <footer class="border-t border-white/10 bg-slate-950/80 py-6 px-4 lg:px-8 text-center text-xs text-slate-400 mt-12">
+    <footer class="border-t border-white/10 bg-slate-950/90 py-6 px-4 lg:px-8 text-center text-xs text-slate-400 mt-12">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-2">
                 <i class="fa-solid fa-star-and-crescent text-muhammadiyah-gold"></i>
-                <span class="font-semibold text-slate-200">MTsS Muhammadiyah Baringin</span>
-                <span>• Kabupaten Agam, Sumatera Barat</span>
+                <span class="font-semibold text-slate-200">Dedikasi oleh Dedi Efendi, S.Pd., M.PFis. (Pengawas Madrasah Kab. Agam) untuk MTsS Muhammadiyah Baringin</span>
+                <span>• Kab. Agam, Sumatera Barat</span>
             </div>
             <p>© 2026 Perpustakaan Digital Berkemajuan. Presisi, Prestisius, & Islami.</p>
         </div>
@@ -717,7 +841,6 @@
 
     <!-- JAVASCRIPT APP LOGIC -->
     <script>
-        // DATA STORE FOR BOOKS
         const booksData = [
             {
                 id: 1,
@@ -727,11 +850,11 @@
                 rating: 5.0,
                 cover: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=400&q=80",
                 snippet: "Kitab pegangan resmi hukum fiqih, tuntunan ibadah, dan aqidah muamalah warga Muhammadiyah.",
-                content: `HIMPUNAN PUTUSAN TARJIH MUHAMMADIYAH\n\nBab I: Kitab Imān wa al-'Aqā'id\nPrinsip Aqidah Islam menurut Al-Qur'an dan As-Sunnah As-Shahihah. Muhammadiyah mendasarkan iktikadnya pada Tauhid yang murni tanpa kemusyrikan dan khurafat.\n\nBab II: Kitab al-Thahārah & As-Salāh\nTuntunan bersuci dan tata cara shalat Nabi Muhammad SAW secara rinci sesuai dalil yang kuat.`
+                content: `HIMPUNAN PUTUSAN TARJIH MUHAMMADIYAH\n\nBab I: Kitab Imān wa al-'Aqā'id\nPrinsip Aqidah Islam menurut Al-Qur'an dan As-Sunnah As-Shahihah. Muhammadiyah mendasarkan iktikadnya pada Tauhid yang murni tanpa kemusyrikan dan khurafat.\n\nBab II: Kitab al-Thahārah & As-Salāh\nTuntunan bersuci dan tata cara shalat Nabi Muhammad SAW secara rinci sesuai dalil shahih.`
             },
             {
                 id: 2,
-                title: "Pendidikan Al-Qur'an Hadits MTs Kelas VII",
+                title: "Buku Siswa Al-Qur'an Hadits MTs Kelas VII",
                 author: "Kementerian Agama RI",
                 category: "mts",
                 rating: 4.8,
@@ -741,27 +864,27 @@
             },
             {
                 id: 3,
-                title: "Matan Matn Al-Ghayah wa Ar-Raghbah (Matan Abu Syuja')",
+                title: "Panduan Guru Akidah Akhlak MTs",
+                author: "Direktorat KSKK Madrasah Kemenag",
+                category: "guru",
+                rating: 4.9,
+                cover: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=80",
+                snippet: "Pedoman metode pembelajaran & asesmen karakter akhlak mulia untuk guru pengajar MTs.",
+                content: `PANDUAN GURU AKIDAH AKHLAK MTs\n\nPrinsip Utama Pembelajaran Akhlak:\n1. Integrasi Pembelajaran Berbasis Keteladanan\n2. Pengembangan Rubrik Asesmen Sikap Tawadhu, Sabar, dan Jujur\n3. Pembiasaan Pembacaan Doa dan Dzikir Sebelum Kegiatan Belajar.`
+            },
+            {
+                id: 4,
+                title: "Matan Matn Al-Ghayah wa Ar-Raghbah (Abu Syuja')",
                 author: "Al-Qadhi Abu Syuja' Ahmad bin Al-Hasan",
                 category: "kitab",
                 rating: 4.9,
                 cover: "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?auto=format&fit=crop&w=400&q=80",
                 snippet: "Kitab fiqih standar Mazhab Syafi'i ringkas yang menjadi rujukan dasar santri dan pelajar ilmu syar'i.",
-                content: `متن الغاية والتقريب (أبو شجاع)\n\nكتاب الطهارة: المياه التي يجوز بها التطهير سبع مياه: ماء السماء، وماء البحر، وماء النهر، وماء البئر، وماء العين، وماء الثلج، وماء البرد.\n\nTujuh jenis air yang sah untuk bersuci: air hujan, air laut, air sungai, air sumur, air mata air, air salju, dan air embun.`
-            },
-            {
-                id: 4,
-                title: "Akidah Akhlak MTs Kelas VIII",
-                author: "Kementerian Agama RI",
-                category: "mts",
-                rating: 4.7,
-                cover: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=80",
-                snippet: "Membentuk pribadi remaja berpikiran positif, bertawakal, serta menghormati orang tua dan guru.",
-                content: `AKIDAH AKHLAK KELAS VIII MTs\n\nBab 2: Membiasakan Akhlak Mahmudah\nPengertian Ridha, Ikhtiar, Tawakal, dan Sabar dalam menghadapi cobaan kehidupan remaja madrasah berkemajuan.`
+                content: `متن الغاية والتقريب (أبو شجاع)\n\nكتاب الطهارة: المياه التي يجوز بها التطهير سبع مياه: ماء السماء، وماء البحر، وماء النهر، وماء البئر، وماء العين، وماء الثلج، وماء البرد.`
             },
             {
                 id: 5,
-                title: "Sejarah Perjuangan KH Ahmad Dahlan",
+                title: "Sejarah & Biografi Perjuangan KH Ahmad Dahlan",
                 author: "Lembaga Pustaka PP Muhammadiyah",
                 category: "kemuhammadiyahan",
                 rating: 4.9,
@@ -771,25 +894,24 @@
             },
             {
                 id: 6,
-                title: "Adabul 'Alim wal Muta'allim (Etika Ilmu)",
+                title: "Adabul 'Alim wal Muta'allim (Etika Menuntut Ilmu)",
                 author: "KH Hasyim Asy'ari / Syekh Az-Zarnuji",
-                category: "motivasi",
+                category: "kitab",
                 rating: 5.0,
                 cover: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=400&q=80",
-                snippet: "Panduan adab menuntut ilmu, penghormatan kepada guru, serta keberkahan hafalan bagi para penuntut ilmu.",
+                snippet: "Panduan adab menuntut ilmu, penghormatan kepada guru, serta keberkahan hafalan bagi penuntut ilmu.",
                 content: `ADAB MENUNTUT ILMU\n\n1. Niat yang ikhlas semata mengharap ridha Allah SWT.\n2. Bersikap tawadhu' dan menghormati para guru dan ustadz.\n3. Memanfaatkan waktu muda secara produktif dengan giat membaca dan berdiskusi.`
             }
         ];
 
-        // STATE VARIABLES
         let activeVisitor = null;
         let visitorLogs = JSON.parse(localStorage.getItem('mtss_visitor_logs') || '[]');
         let googleSheetUrl = localStorage.getItem('mtss_sheet_url') || '';
-        let qrCodeInstance = null;
+        let favorites = JSON.parse(localStorage.getItem('mtss_favorites') || '[]');
         let speechSynth = window.speechSynthesis;
         let isSpeaking = false;
+        let currentCatFilter = 'all';
 
-        // INITIALIZATION ON LOAD
         window.onload = function() {
             renderBooks('all');
             renderVisitorLogTable();
@@ -802,12 +924,11 @@
             }
         };
 
-        // FORM & VISITOR CHECK-IN LOGIC
         function updateIdLabel() {
             const role = document.getElementById('visitor-role').value;
             const label = document.getElementById('id-label');
-            if(role === 'Siswa') label.innerText = 'NISN / ID Siswa *';
-            else if(role === 'Guru') label.innerText = 'NIP / NBM Guru *';
+            if(role === 'Siswa MTs') label.innerText = 'NISN / ID Siswa *';
+            else if(role === 'Guru / Staf') label.innerText = 'NIP / NBM Guru *';
             else label.innerText = 'Nomor KTP / HP *';
         }
 
@@ -839,16 +960,16 @@
             const name = document.getElementById('visitor-name').value;
             const role = document.getElementById('visitor-role').value;
             const idNum = document.getElementById('visitor-id').value;
+            const purpose = document.getElementById('visitor-purpose').value;
             const timeStr = new Date().toLocaleString('id-ID');
 
-            activeVisitor = { name, role, idNum, time: timeStr };
+            activeVisitor = { name, role, idNum, purpose, time: timeStr };
 
             // Save locally
             visitorLogs.unshift(activeVisitor);
             localStorage.setItem('mtss_visitor_logs', JSON.stringify(visitorLogs));
 
-            // Sync with Google Sheet if URL set
-            let syncStatus = "Lokal";
+            // Sync with Google Sheet Webhook if set
             if(googleSheetUrl) {
                 try {
                     fetch(googleSheetUrl, {
@@ -857,15 +978,14 @@
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(activeVisitor)
                     });
-                    syncStatus = "Terikirim ke Sheet";
                 } catch(e) {
                     console.error("Sheet posting error", e);
                 }
             }
 
-            // Update UI
+            // Update Active UI
             document.getElementById('active-user-name').innerText = name;
-            document.getElementById('active-user-role').innerText = `${role} MTsS Baringin`;
+            document.getElementById('active-user-role').innerText = role;
             document.getElementById('active-user-id').innerText = `ID: ${idNum}`;
             
             renderVisitorLogTable();
@@ -873,7 +993,7 @@
 
             Swal.fire({
                 title: 'Selamat Datang!',
-                text: `Barakallah, ${name}. Akses Perpustakaan Digital MTsS Muhammadiyah Baringin telah dibuka.`,
+                text: `Barakallah, ${name}. Sesi kunjungan Perpustakaan Digital MTsS Muhammadiyah Baringin aktif.`,
                 icon: 'success',
                 confirmButtonColor: '#C8102E',
                 background: '#1e293b',
@@ -893,7 +1013,6 @@
             }
         }
 
-        // TAB SWITCHING
         function switchTab(tabId) {
             document.querySelectorAll('.tab-pane').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -907,30 +1026,31 @@
             activeBtn.classList.remove('text-slate-300');
         }
 
-        // BOOK RENDERING & FILTERING
         function renderBooks(filterCat = 'all', searchQuery = '') {
             const grid = document.getElementById('books-grid');
             grid.innerHTML = "";
 
             const filtered = booksData.filter(b => {
-                const matchCat = (filterCat === 'all' || b.category === filterCat);
+                const matchFav = (filterCat === 'favorit') ? favorites.includes(b.id) : true;
+                const matchCat = (filterCat === 'all' || filterCat === 'favorit' || b.category === filterCat);
                 const matchSearch = b.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
                                     b.author.toLowerCase().includes(searchQuery.toLowerCase());
-                return matchCat && matchSearch;
+                return matchCat && matchSearch && matchFav;
             });
 
             if(filtered.length === 0) {
                 grid.innerHTML = `
                     <div class="col-span-full text-center py-12 text-slate-400">
                         <i class="fa-solid fa-book-bookmark text-4xl mb-3 text-slate-600"></i>
-                        <p>Tidak ada buku yang sesuai pencarian.</p>
+                        <p>Tidak ada buku yang sesuai dengan pencarian atau filter ini.</p>
                     </div>`;
                 return;
             }
 
             filtered.forEach(book => {
+                const isFav = favorites.includes(book.id);
                 const card = document.createElement('div');
-                card.className = "glass-card rounded-2xl overflow-hidden flex flex-col justify-between border border-white/10 group";
+                card.className = "glass-card rounded-2xl overflow-hidden flex flex-col justify-between border border-white/10 group relative";
                 card.innerHTML = `
                     <div>
                         <div class="relative h-48 overflow-hidden bg-slate-900">
@@ -938,6 +1058,9 @@
                             <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-black/70 backdrop-blur-md text-[10px] font-bold text-muhammadiyah-gold uppercase border border-muhammadiyah-gold/30">
                                 ${book.category}
                             </span>
+                            <button onclick="toggleFavorite(${book.id})" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/70 text-sm flex items-center justify-center transition ${isFav ? 'text-red-500' : 'text-slate-400 hover:text-white'}">
+                                <i class="fa-solid fa-heart"></i>
+                            </button>
                             <div class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-black/80 text-[11px] text-yellow-400 flex items-center gap-1 font-bold">
                                 <i class="fa-solid fa-star"></i> ${book.rating}
                             </div>
@@ -958,12 +1081,21 @@
             });
         }
 
+        function toggleFavorite(id) {
+            if(favorites.includes(id)) {
+                favorites = favorites.filter(favId => favId !== id);
+            } else {
+                favorites.push(id);
+            }
+            localStorage.setItem('mtss_favorites', JSON.stringify(favorites));
+            renderBooks(currentCatFilter, document.getElementById('book-search').value);
+        }
+
         function filterBooks() {
             const query = document.getElementById('book-search').value;
             renderBooks(currentCatFilter, query);
         }
 
-        let currentCatFilter = 'all';
         function setCategoryFilter(cat) {
             currentCatFilter = cat;
             document.querySelectorAll('.cat-filter-btn').forEach(btn => {
@@ -974,7 +1106,6 @@
             renderBooks(cat, document.getElementById('book-search').value);
         }
 
-        // READER MODAL
         let currentActiveBook = null;
         function openBookReader(bookId) {
             const book = booksData.find(b => b.id === bookId);
@@ -1000,21 +1131,20 @@
             if(isSpeaking) {
                 speechSynth.cancel();
                 isSpeaking = false;
-                btn.innerHTML = `<i class="fa-solid fa-volume-high text-muhammadiyah-gold"></i> Baca Suara`;
+                btn.innerHTML = `<i class="fa-solid fa-volume-high text-muhammadiyah-gold"></i> <span>Baca Suara</span>`;
             } else {
                 const utterance = new SpeechSynthesisUtterance(currentActiveBook.content);
                 utterance.lang = 'id-ID';
                 utterance.onend = () => {
                     isSpeaking = false;
-                    btn.innerHTML = `<i class="fa-solid fa-volume-high text-muhammadiyah-gold"></i> Baca Suara`;
+                    btn.innerHTML = `<i class="fa-solid fa-volume-high text-muhammadiyah-gold"></i> <span>Baca Suara</span>`;
                 };
                 speechSynth.speak(utterance);
                 isSpeaking = true;
-                btn.innerHTML = `<i class="fa-solid fa-stop text-red-400"></i> Hentikan`;
+                btn.innerHTML = `<i class="fa-solid fa-stop text-red-400"></i> <span>Hentikan</span>`;
             }
         }
 
-        // YOUTUBE MODAL
         function playYoutubeModal(url) {
             document.getElementById('youtube-iframe').src = url;
             document.getElementById('youtube-modal').classList.remove('hidden');
@@ -1025,7 +1155,6 @@
             document.getElementById('youtube-modal').classList.add('hidden');
         }
 
-        // GOOGLE SHEET MODAL & CONFIG
         function openSheetConfigModal() {
             document.getElementById('sheet-modal').classList.remove('hidden');
         }
@@ -1041,7 +1170,7 @@
 
             Swal.fire({
                 title: 'Integrasi Disimpan',
-                text: 'Webhook Google Apps Script berhasil dipasang.',
+                text: 'Webhook Google Apps Script berhasil dikonfigurasi.',
                 icon: 'success',
                 confirmButtonColor: '#C8102E'
             });
@@ -1050,13 +1179,12 @@
             closeSheetConfigModal();
         }
 
-        // VISITOR LOG TABLE & CSV EXPORT
         function renderVisitorLogTable() {
             const tbody = document.getElementById('visitor-log-tbody');
             tbody.innerHTML = "";
 
             if(visitorLogs.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="5" class="px-4 py-6 text-center text-slate-500">Belum ada catatan pengunjung hari ini.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="6" class="px-4 py-6 text-center text-slate-500">Belum ada catatan pengunjung hari ini.</td></tr>`;
                 return;
             }
 
@@ -1066,8 +1194,9 @@
                 tr.innerHTML = `
                     <td class="px-4 py-3 font-mono text-[11px] text-slate-400">${log.time}</td>
                     <td class="px-4 py-3 font-bold text-white">${log.name}</td>
-                    <td class="px-4 py-3"><span class="px-2 py-0.5 rounded bg-agam/30 text-muhammadiyah-gold border border-agam text-[10px]">${log.role}</span></td>
+                    <td class="px-4 py-3"><span class="px-2 py-0.5 rounded bg-agam/30 text-muhammadiyah-gold border border-agam text-[10px] font-semibold">${log.role}</span></td>
                     <td class="px-4 py-3 font-mono text-slate-300">${log.idNum}</td>
+                    <td class="px-4 py-3 text-slate-300 text-[11px]">${log.purpose || 'Membaca Buku'}</td>
                     <td class="px-4 py-3 text-center">
                         <span class="text-[10px] text-emerald-400 font-semibold"><i class="fa-solid fa-circle-check"></i> Tersimpan</span>
                     </td>
@@ -1105,9 +1234,9 @@
                 return;
             }
 
-            let csvContent = "data:text/csv;charset=utf-8,Waktu,Nama,Status,ID_NISN_NIP\n";
+            let csvContent = "data:text/csv;charset=utf-8,Waktu,Nama,Status,ID_NISN_NIP,Tujuan\n";
             visitorLogs.forEach(row => {
-                csvContent += `"${row.time}","${row.name}","${row.role}","${row.idNum}"\n`;
+                csvContent += `"${row.time}","${row.name}","${row.role}","${row.idNum}","${row.purpose || ''}"\n`;
             });
 
             const encodedUri = encodeURI(csvContent);
