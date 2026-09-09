@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pustaka Digital - MTsS Muhammadiyah Baringin Kab. Agam</title>
+    <title>Perpustakaan Digital - MTsS Muhammadiyah Baringin Kab. Agam</title>
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -15,18 +15,19 @@
                         agam: {
                             DEFAULT: '#C8102E',
                             dark: '#8B0000',
-                            light: '#E63946',
-                            soft: '#FFF5F5'
+                            bright: '#E61C3D',
+                            glow: 'rgba(200, 16, 46, 0.25)'
                         },
                         muhammadiyah: {
                             gold: '#FFD700',
-                            amber: '#D4AF37',
-                            darkGold: '#B8860B'
+                            amber: '#F59E0B',
+                            darkGold: '#B8860B',
+                            lightGold: '#FEF08A'
                         },
                         islamic: {
-                            green: '#00875A',
-                            emerald: '#0F5132',
-                            mint: '#E8F5E9'
+                            green: '#10B981',
+                            emerald: '#059669',
+                            darkGreen: '#047857'
                         }
                     },
                     fontFamily: {
@@ -52,59 +53,63 @@
     <!-- SweetAlert2 CDN -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <!-- Custom Glassmorphism & Aesthetics Styling -->
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background: linear-gradient(135deg, #180205 0%, #2e050b 35%, #081a17 100%);
+            background-color: #0D0204;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(200, 16, 46, 0.22) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(245, 158, 11, 0.15) 0%, transparent 45%),
+                radial-gradient(circle at 50% 50%, rgba(13, 2, 4, 0.95) 0%, #0A0305 100%);
             background-attachment: fixed;
             color: #f8fafc;
             min-height: 100vh;
         }
 
         .glass-panel {
-            background: rgba(255, 255, 255, 0.07);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(245, 158, 11, 0.25);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
         }
 
         .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(14px);
             border: 1px solid rgba(255, 255, 255, 0.08);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .glass-card:hover {
-            transform: translateY(-6px) scale(1.01);
-            background: rgba(255, 255, 255, 0.12);
-            border-color: rgba(255, 215, 0, 0.4);
-            box-shadow: 0 12px 30px rgba(200, 16, 46, 0.25);
+            transform: translateY(-5px);
+            background: rgba(30, 41, 59, 0.85);
+            border-color: rgba(245, 158, 11, 0.45);
+            box-shadow: 0 12px 30px rgba(200, 16, 46, 0.3);
         }
 
         .quick-access-card {
-            background: linear-gradient(135deg, rgba(200, 16, 46, 0.15) 0%, rgba(0, 135, 90, 0.15) 100%);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 215, 0, 0.3);
+            background: linear-gradient(135deg, rgba(200, 16, 46, 0.2) 0%, rgba(15, 23, 42, 0.8) 100%);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(245, 158, 11, 0.3);
             transition: all 0.3s ease;
         }
 
         .quick-access-card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-4px) scale(1.02);
             border-color: #FFD700;
-            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.2);
+            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.3);
+            background: linear-gradient(135deg, rgba(200, 16, 46, 0.35) 0%, rgba(30, 41, 59, 0.9) 100%);
         }
 
         .gold-gradient-text {
-            background: linear-gradient(135deg, #FFF099 0%, #FFD700 50%, #DAA520 100%);
+            background: linear-gradient(135deg, #FEF08A 0%, #FFD700 50%, #F59E0B 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .minang-pattern {
-            background-image: radial-gradient(rgba(255, 215, 0, 0.15) 1px, transparent 0);
+            background-image: radial-gradient(rgba(255, 215, 0, 0.12) 1px, transparent 0);
             background-size: 24px 24px;
         }
 
@@ -117,7 +122,7 @@
             width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: rgba(15, 23, 42, 0.6);
+            background: rgba(13, 2, 4, 0.9);
         }
         ::-webkit-scrollbar-thumb {
             background: #C8102E;
@@ -126,56 +131,47 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #FFD700;
         }
-
-        @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 15px rgba(200, 16, 46, 0.4); }
-            50% { box-shadow: 0 0 30px rgba(255, 215, 0, 0.6); }
-        }
-        .pulse-gold {
-            animation: pulse-glow 3s infinite;
-        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between selection:bg-agam selection:text-white minang-pattern">
 
-    <!-- NAVIGATION BAR -->
-    <nav class="sticky top-0 z-40 glass-panel border-b border-white/10 px-4 lg:px-8 py-3">
+    <nav class="sticky top-0 z-40 glass-panel border-b border-amber-500/20 px-4 lg:px-8 py-3">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             
             <!-- Brand Logo & Title -->
             <div class="flex items-center gap-3 cursor-pointer" onclick="switchView('checkin')">
-                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-agam to-agam-dark flex items-center justify-center border border-muhammadiyah-gold/50 shadow-lg relative overflow-hidden group">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-agam via-red-700 to-agam-dark flex items-center justify-center border border-amber-400/60 shadow-lg relative overflow-hidden group">
                     <i class="fa-solid fa-star-and-crescent text-2xl text-muhammadiyah-gold group-hover:rotate-45 transition-transform duration-500"></i>
                 </div>
                 <div>
-                    <h1 class="text-lg md:text-xl font-bold tracking-tight text-white flex items-center gap-2">
-                        Pustaka Digital <span class="text-xs px-2 py-0.5 rounded bg-agam text-white uppercase font-semibold border border-muhammadiyah-gold/40">MTsS</span>
+                    <h1 class="text-base md:text-xl font-extrabold tracking-tight text-white flex items-center gap-2">
+                        Perpustakaan Digital <span class="text-[10px] px-2 py-0.5 rounded bg-agam text-white uppercase font-bold border border-amber-400/50">MTsS</span>
                     </h1>
-                    <p class="text-xs text-slate-300 font-medium">MTsS Muhammadiyah Baringin <span class="text-muhammadiyah-gold">•</span> Kab. Agam</p>
+                    <p class="text-xs text-amber-200/80 font-medium">MTsS Muhammadiyah Baringin <span class="text-muhammadiyah-gold">•</span> Kab. Agam</p>
                 </div>
             </div>
 
-            <!-- Stats Ticker & Actions -->
-            <div class="hidden md:flex items-center gap-6 text-sm">
-                <div class="flex items-center gap-2 bg-black/40 px-3 py-1.5 rounded-full border border-white/10">
+            <!-- Stats Ticker -->
+            <div class="hidden lg:flex items-center gap-6 text-xs">
+                <div class="flex items-center gap-2 bg-slate-950/80 px-3.5 py-1.5 rounded-full border border-amber-500/30">
                     <i class="fa-solid fa-users text-muhammadiyah-gold"></i>
                     <span class="text-slate-300">Pengunjung Hari Ini:</span>
-                    <span id="today-visitors-count" class="font-bold text-white">0</span>
+                    <span id="today-visitors-count" class="font-extrabold text-amber-300">0</span>
                 </div>
-                <div class="flex items-center gap-2 bg-black/40 px-3 py-1.5 rounded-full border border-white/10">
+                <div class="flex items-center gap-2 bg-slate-950/80 px-3.5 py-1.5 rounded-full border border-amber-500/30">
                     <i class="fa-solid fa-book-bookmark text-islamic-green"></i>
-                    <span class="text-slate-300">Koleksi Kitab & Buku:</span>
-                    <span class="font-bold text-white">1,500+</span>
+                    <span class="text-slate-300">Koleksi Digital:</span>
+                    <span class="font-extrabold text-amber-300">1,500+ Kitab & Buku</span>
                 </div>
             </div>
 
             <!-- Header Action Buttons -->
             <div class="flex items-center gap-2">
-                <button onclick="openSheetConfigModal()" class="px-3 py-2 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-xs font-semibold text-slate-200 border border-white/10 transition flex items-center gap-2">
-                    <i class="fa-solid fa-sheet-plastic text-green-400"></i>
+                <button onclick="openSheetConfigModal()" class="px-3 py-2 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-xs font-semibold text-slate-200 border border-emerald-500/40 transition flex items-center gap-2 shadow">
+                    <i class="fa-solid fa-sheet-plastic text-emerald-400"></i>
                     <span class="hidden sm:inline">Google Sheet Sync</span>
                 </button>
-                <button onclick="switchView('checkin')" id="checkin-btn-nav" class="px-4 py-2 rounded-lg bg-gradient-to-r from-agam via-red-600 to-agam-dark hover:from-red-600 hover:to-agam text-xs font-bold text-white border border-muhammadiyah-gold/40 transition flex items-center gap-2 shadow-md">
+                <button onclick="switchView('checkin')" id="checkin-btn-nav" class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:from-yellow-400 hover:to-amber-300 text-xs font-extrabold text-slate-950 border border-amber-300 transition flex items-center gap-2 shadow-lg shadow-amber-500/20">
                     <i class="fa-solid fa-id-card"></i>
                     <span>Buku Tamu</span>
                 </button>
@@ -183,64 +179,74 @@
         </div>
     </nav>
 
+    <div class="bg-gradient-to-r from-agam-dark via-slate-950 to-agam-dark border-y border-amber-500/20 py-1.5 px-4 overflow-hidden text-xs text-amber-200/90 font-medium">
+        <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+            <span class="flex items-center gap-2 shrink-0 text-muhammadiyah-gold font-bold">
+                <i class="fa-solid fa-bullhorn"></i> PUSTAKA BERKEMAJUAN:
+            </span>
+            <marquee class="w-full">
+                نٓ وَالْقَلَمِ وَمَا يَسْطُرُوْنَ • Selamat Datang di Perpustakaan Digital MTsS Muhammadiyah Baringin Kab. Agam — "Dengan Ilmu Hidup Menjadi Mudah, Dengan Agama Hidup Menjadi Terarah, Dengan Seni Hidup Menjadi Indah"
+            </marquee>
+        </div>
+    </div>
+
     <!-- MAIN CONTENT CONTAINER -->
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 lg:px-8 py-6">
 
-        <!-- VIEW 1: VISITOR CHECK-IN & GATEWAY PAGE -->
-        <section id="checkin-view" class="py-6 min-h-[80vh] flex items-center justify-center">
+        <section id="checkin-view" class="py-6 min-h-[75vh] flex items-center justify-center">
             <div class="w-full max-w-4xl grid md:grid-cols-12 gap-8 items-center">
                 
-                <!-- Left Banner Info -->
+                <!-- Left Info Banner -->
                 <div class="md:col-span-5 space-y-6 text-center md:text-left">
-                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-agam/30 border border-agam text-muhammadiyah-gold text-xs font-semibold">
-                        <i class="fa-solid fa-mosque"></i> Perpustakaan Digital Berkemajuan
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-agam/20 border border-agam text-muhammadiyah-gold text-xs font-semibold">
+                        <i class="fa-solid fa-mosque"></i> Portal Literasi Berkemajuan
                     </div>
                     <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-tight text-white">
-                        Gerbang Ilmu & <span class="gold-gradient-text">Peradaban Islam</span>
+                        Gerbang Ilmu & <span class="gold-gradient-text">Khazanah Islam</span>
                     </h2>
-                    <p class="text-slate-300 text-sm leading-relaxed">
-                        Silakan isi data kunjungan Anda untuk mengakses koleksi buku pelajaran MTsS Baringin, e-kitab klasik, serta portal perpustakaan terkemuka dunia secara gratis dan serba instan.
+                    <p class="text-slate-300 text-xs md:text-sm leading-relaxed">
+                        Silakan daftarkan kehadiran Anda untuk membuka akses katalog buku pelajaran MTsS Baringin, e-kitab klasik, serta tautan perpustakaan digital terkemuka Indonesia & Dunia secara gratis.
                     </p>
-                    <div class="p-4 rounded-xl glass-card border-l-4 border-l-muhammadiyah-gold text-xs text-slate-300 italic">
-                        <p class="arabic-font text-lg text-muhammadiyah-gold mb-1 text-right">اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ</p>
-                        "Bacalah dengan (menyebut) nama Tuhanmu yang menciptakan." (QS. Al-'Alaq: 1)
+                    <div class="p-4 rounded-xl glass-card border-l-4 border-l-muhammadiyah-gold text-xs text-amber-100/90 italic space-y-1">
+                        <p class="arabic-font text-xl text-muhammadiyah-gold text-right">اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ</p>
+                        <p>"Bacalah dengan (menyebut) nama Tuhanmu yang menciptakan." (QS. Al-'Alaq: 1)</p>
                     </div>
                 </div>
 
-                <!-- Right Registration Card -->
-                <div class="md:col-span-7 glass-panel rounded-2xl p-6 md:p-8 relative overflow-hidden border border-white/20 shadow-2xl">
-                    <div class="absolute -top-12 -right-12 w-32 h-32 bg-agam/40 rounded-full blur-2xl"></div>
-                    <div class="absolute -bottom-12 -left-12 w-32 h-32 bg-muhammadiyah-gold/20 rounded-full blur-2xl"></div>
+                <!-- Right Check-in Form Card -->
+                <div class="md:col-span-7 glass-panel rounded-2xl p-6 md:p-8 relative overflow-hidden border border-amber-500/30 shadow-2xl">
+                    <div class="absolute -top-12 -right-12 w-32 h-32 bg-agam/30 rounded-full blur-2xl"></div>
+                    <div class="absolute -bottom-12 -left-12 w-32 h-32 bg-muhammadiyah-amber/20 rounded-full blur-2xl"></div>
 
-                    <div class="flex items-center justify-between pb-4 mb-6 border-b border-white/10">
+                    <div class="flex items-center justify-between pb-4 mb-6 border-b border-amber-500/20">
                         <div>
-                            <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                            <h3 class="text-lg font-extrabold text-white flex items-center gap-2">
                                 <i class="fa-solid fa-user-check text-muhammadiyah-gold"></i> Buku Tamu Digital
                             </h3>
                             <p class="text-xs text-slate-400">Pencatatan Kunjungan Real-Time Perpustakaan</p>
                         </div>
-                        <span class="text-xs px-2.5 py-1 rounded-full bg-green-900/60 text-green-300 border border-green-500/30 flex items-center gap-1.5">
-                            <span class="w-2 h-2 rounded-full bg-green-400 animate-ping"></span> Realtime Ready
+                        <span class="text-[11px] px-2.5 py-1 rounded-full bg-emerald-950/80 text-emerald-300 border border-emerald-500/40 flex items-center gap-1.5 font-semibold">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> Online Ready
                         </span>
                     </div>
 
                     <form id="checkin-form" onsubmit="handleCheckin(event)" class="space-y-4">
                         <div>
-                            <label class="block text-xs font-semibold text-slate-300 mb-1">Nama Lengkap Pengunjung <span class="text-agam">*</span></label>
+                            <label class="block text-xs font-bold text-amber-200/90 mb-1">Nama Lengkap Pengunjung <span class="text-agam-bright">*</span></label>
                             <div class="relative">
                                 <i class="fa-solid fa-user absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
-                                <input type="text" id="visitor-name" required placeholder="Contoh: Muhammad Raihan, S.Pd" 
-                                    class="w-full bg-slate-900/90 border border-white/15 rounded-lg pl-10 pr-4 py-2.5 text-sm text-white focus:outline-none focus:border-muhammadiyah-gold transition">
+                                <input type="text" id="visitor-name" required placeholder="Contoh: Ahmad Fauzi, S.Pd" 
+                                    class="w-full bg-slate-950/90 border border-amber-500/30 rounded-xl pl-10 pr-4 py-2.5 text-sm text-white focus:outline-none focus:border-muhammadiyah-gold transition">
                             </div>
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-xs font-semibold text-slate-300 mb-1">Status Pengunjung <span class="text-agam">*</span></label>
+                                <label class="block text-xs font-bold text-amber-200/90 mb-1">Status Pengunjung <span class="text-agam-bright">*</span></label>
                                 <div class="relative">
                                     <i class="fa-solid fa-graduation-cap absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
                                     <select id="visitor-role" required onchange="updateIdLabel()"
-                                        class="w-full bg-slate-900/90 border border-white/15 rounded-lg pl-10 pr-4 py-2.5 text-sm text-white focus:outline-none focus:border-muhammadiyah-gold transition appearance-none">
+                                        class="w-full bg-slate-950/90 border border-amber-500/30 rounded-xl pl-10 pr-4 py-2.5 text-sm text-white focus:outline-none focus:border-muhammadiyah-gold transition appearance-none">
                                         <option value="Siswa MTs">Siswa / Santri MTs</option>
                                         <option value="Guru / Staf">Guru / Staf Pengajar</option>
                                         <option value="Tamu Umum">Tamu Umum / Wali</option>
@@ -248,24 +254,24 @@
                                 </div>
                             </div>
                             <div>
-                                <label id="id-label" class="block text-xs font-semibold text-slate-300 mb-1">NISN / ID Siswa <span class="text-agam">*</span></label>
+                                <label id="id-label" class="block text-xs font-bold text-amber-200/90 mb-1">NISN / ID Siswa <span class="text-agam-bright">*</span></label>
                                 <div class="relative">
                                     <i class="fa-solid fa-id-badge absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
                                     <input type="text" id="visitor-id" required placeholder="Masukkan nomor ID" 
-                                        class="w-full bg-slate-900/90 border border-white/15 rounded-lg pl-10 pr-4 py-2.5 text-sm text-white focus:outline-none focus:border-muhammadiyah-gold transition">
+                                        class="w-full bg-slate-950/90 border border-amber-500/30 rounded-xl pl-10 pr-4 py-2.5 text-sm text-white focus:outline-none focus:border-muhammadiyah-gold transition">
                                 </div>
                             </div>
                         </div>
 
                         <div>
-                            <label class="block text-xs font-semibold text-slate-300 mb-1">Tujuan Kunjungan <span class="text-agam">*</span></label>
+                            <label class="block text-xs font-bold text-amber-200/90 mb-1">Tujuan Kunjungan <span class="text-agam-bright">*</span></label>
                             <div class="relative">
                                 <i class="fa-solid fa-bullseye absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
                                 <select id="visitor-purpose" required
-                                    class="w-full bg-slate-900/90 border border-white/15 rounded-lg pl-10 pr-4 py-2.5 text-sm text-white focus:outline-none focus:border-muhammadiyah-gold transition appearance-none">
-                                    <option value="Membaca Buku Pelajaran">Membaca Buku Teks Pelajaran MTs</option>
-                                    <option value="Mengkaji Kitab & Islam">Mengkaji Kitab Kuning / Ke-Muhammadiyahan</option>
-                                    <option value="Akses Library Dunia & Digital">Akses Portal Library Dunia (WeLib, F15, Syamilah)</option>
+                                    class="w-full bg-slate-950/90 border border-amber-500/30 rounded-xl pl-10 pr-4 py-2.5 text-sm text-white focus:outline-none focus:border-muhammadiyah-gold transition appearance-none">
+                                    <option value="Membaca Buku Pelajaran MTs">Membaca Buku Teks Pelajaran MTs</option>
+                                    <option value="Mengkaji Kitab & Ke-Muhammadiyahan">Mengkaji Kitab Kuning / Ke-Muhammadiyahan</option>
+                                    <option value="Akses Portal Library Dunia">Akses Portal Library Dunia (WeLib, F15, Syamilah)</option>
                                     <option value="Pencarian Tugas & Riset">Pencarian Tugas & Riset Kemenag</option>
                                 </select>
                             </div>
@@ -277,154 +283,182 @@
                                 <i class="fa-solid fa-qrcode"></i> Pratinjau QR Pas Tamu
                             </button>
                             <span id="sheet-status-indicator" class="text-[11px] text-slate-400 italic">
-                                Mode: Local & Google Sheet Sync
+                                Sync: Local Data
                             </span>
                         </div>
 
-                        <!-- QR Preview Box Container -->
-                        <div id="qr-preview-box" class="hidden p-4 rounded-xl bg-slate-950/90 border border-muhammadiyah-gold/40 text-center space-y-3">
-                            <p class="text-xs text-slate-300 font-semibold">QR Code Akses Masuk Tamu Anda:</p>
+                        <!-- QR Preview Box -->
+                        <div id="qr-preview-box" class="hidden p-4 rounded-xl bg-slate-950 border border-amber-500/40 text-center space-y-3">
+                            <p class="text-xs text-amber-200 font-semibold">QR Code Akses Masuk Tamu Anda:</p>
                             <div id="qrcode-target" class="p-2 bg-white rounded-lg inline-block mx-auto shadow-md"></div>
-                            <p class="text-[10px] text-slate-400">Simpan atau tunjukkan QR ini ke pustakawan sekolah</p>
+                            <p class="text-[10px] text-slate-400">Tunjukkan QR ini kepada petugas perpustakaan</p>
                         </div>
 
-                        <button type="submit" class="w-full py-3 px-6 rounded-xl bg-gradient-to-r from-agam via-red-600 to-agam-dark hover:from-red-600 hover:to-agam text-white font-bold text-sm tracking-wide shadow-lg border border-muhammadiyah-gold/40 transition transform active:scale-[0.98] flex items-center justify-center gap-2">
-                            <span>Masuk Ke Perpustakaan Digital</span>
-                            <i class="fa-solid fa-arrow-right text-muhammadiyah-gold"></i>
+                        <!-- Submit Button with Gold Contrast -->
+                        <button type="submit" class="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:from-yellow-400 hover:to-amber-300 text-slate-950 font-extrabold text-sm tracking-wide shadow-lg shadow-amber-500/20 border border-amber-300 transition transform active:scale-[0.98] flex items-center justify-center gap-2">
+                            <span>MASUK KE PERPUSTAKAAN DIGITAL</span>
+                            <i class="fa-solid fa-arrow-right text-slate-950"></i>
                         </button>
                     </form>
                 </div>
             </div>
         </section>
 
-        <!-- VIEW 2: MAIN LIBRARY DASHBOARD -->
         <section id="dashboard-view" class="hidden space-y-8 py-4">
 
-            <!-- Hero Welcome Banner -->
-            <div class="relative rounded-2xl glass-panel overflow-hidden border border-white/15 p-6 md:p-8 bg-gradient-to-r from-agam-dark/90 via-slate-900/90 to-slate-950">
+            <!-- Active User Welcome Card -->
+            <div class="relative rounded-2xl glass-panel overflow-hidden border border-amber-500/30 p-6 md:p-8 bg-gradient-to-r from-agam-dark/95 via-slate-950/90 to-slate-950">
                 <div class="absolute right-0 top-0 bottom-0 w-1/3 opacity-10 bg-repeat minang-pattern pointer-events-none"></div>
                 <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
                     <div class="space-y-2 text-center md:text-left">
-                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-muhammadiyah-gold/20 border border-muhammadiyah-gold/40 text-muhammadiyah-gold text-xs font-bold">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 text-xs font-bold">
                             <i class="fa-solid fa-check-circle"></i> Sesi Pengunjung Aktif
                         </div>
                         <h2 class="text-2xl md:text-3xl font-extrabold text-white">
                             Selamat Datang, <span id="active-user-name" class="gold-gradient-text">Tamu Terhormat</span>
                         </h2>
                         <p class="text-xs md:text-sm text-slate-300 max-w-2xl">
-                            Nikmati akses tanpa batas ke bahan ajar MTsS Muhammadiyah Baringin, karya ilmiah Kemuhammadiyahan, serta jejaring perpustakaan digital terkemuka nasional & internasional.
+                            Nikmati akses cepat ke koleksi buku MTsS Muhammadiyah Baringin, karya ilmiah Kemuhammadiyahan, serta jejaring perpustakaan digital dunia.
                         </p>
                     </div>
 
-                    <!-- Quick User Card -->
-                    <div class="glass-card p-4 rounded-xl border border-muhammadiyah-gold/30 min-w-[240px] text-center md:text-right">
+                    <div class="glass-card p-4 rounded-xl border border-amber-500/40 min-w-[240px] text-center md:text-right">
                         <span class="text-[10px] uppercase tracking-wider text-slate-400 block mb-1">Status Pengunjung</span>
-                        <div id="active-user-role" class="text-sm font-bold text-muhammadiyah-gold">Siswa MTs</div>
+                        <div id="active-user-role" class="text-sm font-extrabold text-muhammadiyah-gold">Siswa MTs</div>
                         <div id="active-user-id" class="text-xs text-slate-300 font-mono">ID: -</div>
-                        <button onclick="switchView('checkin')" class="mt-3 text-xs text-red-400 hover:text-red-300 underline font-medium flex items-center gap-1 justify-center md:justify-end">
-                            <i class="fa-solid fa-right-from-bracket"></i> Ganti Pengunjung
+                        <button onclick="switchView('checkin')" class="mt-3 text-xs text-red-400 hover:text-red-300 underline font-semibold flex items-center gap-1 justify-center md:justify-end">
+                            <i class="fa-solid fa-right-from-bracket"></i> Keluar / Ganti Tamu
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- FEATURED 1-CLICK QUICK ACCESS BANNER & CARDS -->
             <div class="space-y-4">
                 <div class="flex items-center justify-between">
-                    <h3 class="text-base md:text-lg font-bold text-white flex items-center gap-2">
+                    <h3 class="text-base md:text-lg font-extrabold text-white flex items-center gap-2">
                         <i class="fa-solid fa-bolt text-muhammadiyah-gold"></i> Akses Cepat 1-Klik Portal Terkemuka
                     </h3>
-                    <span class="text-xs text-slate-400 hidden sm:inline">Langsung terhubung ke jejaring e-library pilihan</span>
+                    <span class="text-xs text-amber-200/70 hidden sm:inline">Terhubung langsung ke portal e-library utama</span>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
                     
-                    <!-- Quick Card 1: WeLib -->
-                    <a href="https://welib.org/" target="_blank" class="quick-access-card rounded-xl p-4 flex flex-col justify-between group">
-                        <div class="space-y-2">
+                    <!-- WeLib Card -->
+                    <a href="https://welib.org/" target="_blank" class="quick-access-card rounded-2xl p-4 flex flex-col justify-between group">
+                        <div class="space-y-3">
                             <div class="flex items-center justify-between">
-                                <span class="w-9 h-9 rounded-lg bg-blue-600/30 text-blue-400 flex items-center justify-center font-bold text-base border border-blue-400/40">
+                                <span class="w-10 h-10 rounded-xl bg-blue-900/60 text-blue-400 flex items-center justify-center font-extrabold text-lg border border-blue-500/40">
                                     <i class="fa-solid fa-globe"></i>
                                 </span>
-                                <span class="text-[9px] uppercase tracking-wider font-extrabold px-2 py-0.5 rounded bg-blue-900/60 text-blue-300 border border-blue-500/30">1-Klik Akses</span>
+                                <span class="text-[9px] uppercase font-extrabold px-2 py-0.5 rounded-full bg-blue-950 text-blue-300 border border-blue-700">Global</span>
                             </div>
-                            <h4 class="text-sm font-bold text-white group-hover:text-muhammadiyah-gold transition">WeLib Library</h4>
-                            <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed">Platform perpustakaan digital & koleksi literatur internasional terintegrasi.</p>
+                            <div>
+                                <h4 class="text-sm font-extrabold text-white group-hover:text-muhammadiyah-gold transition">WeLib Library</h4>
+                                <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed mt-1">Portal perpustakaan digital dunia interaktif.</p>
+                            </div>
                         </div>
-                        <div class="mt-3 pt-2 border-t border-white/10 flex items-center justify-between text-[11px] text-muhammadiyah-gold font-bold">
-                            <span>Buka welib.org</span>
+                        <div class="mt-4 pt-2 border-t border-white/10 flex items-center justify-between text-[11px] text-muhammadiyah-gold font-bold">
+                            <span>welib.org</span>
                             <i class="fa-solid fa-arrow-up-right-from-square group-hover:translate-x-0.5 transition"></i>
                         </div>
                     </a>
 
-                    <!-- Quick Card 2: F15 Library -->
-                    <a href="https://f15library.com/" target="_blank" class="quick-access-card rounded-xl p-4 flex flex-col justify-between group">
-                        <div class="space-y-2">
+                    <!-- F15 Library Card -->
+                    <a href="https://f15library.com/" target="_blank" class="quick-access-card rounded-2xl p-4 flex flex-col justify-between group">
+                        <div class="space-y-3">
                             <div class="flex items-center justify-between">
-                                <span class="w-9 h-9 rounded-lg bg-purple-600/30 text-purple-400 flex items-center justify-center font-bold text-base border border-purple-400/40">
+                                <span class="w-10 h-10 rounded-xl bg-purple-900/60 text-purple-400 flex items-center justify-center font-extrabold text-lg border border-purple-500/40">
                                     <i class="fa-solid fa-book-atlas"></i>
                                 </span>
-                                <span class="text-[9px] uppercase tracking-wider font-extrabold px-2 py-0.5 rounded bg-purple-900/60 text-purple-300 border border-purple-500/30">1-Klik Akses</span>
+                                <span class="text-[9px] uppercase font-extrabold px-2 py-0.5 rounded-full bg-purple-950 text-purple-300 border border-purple-700">Digital</span>
                             </div>
-                            <h4 class="text-sm font-bold text-white group-hover:text-muhammadiyah-gold transition">F15 Library</h4>
-                            <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed">Repositori buku digital modern dengan katalog referensi terlengkap.</p>
+                            <div>
+                                <h4 class="text-sm font-extrabold text-white group-hover:text-muhammadiyah-gold transition">F15 Library</h4>
+                                <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed mt-1">Repositori referensi buku & literatur modern.</p>
+                            </div>
                         </div>
-                        <div class="mt-3 pt-2 border-t border-white/10 flex items-center justify-between text-[11px] text-muhammadiyah-gold font-bold">
-                            <span>Buka f15library.com</span>
+                        <div class="mt-4 pt-2 border-t border-white/10 flex items-center justify-between text-[11px] text-muhammadiyah-gold font-bold">
+                            <span>f15library.com</span>
                             <i class="fa-solid fa-arrow-up-right-from-square group-hover:translate-x-0.5 transition"></i>
                         </div>
                     </a>
 
-                    <!-- Quick Card 3: Maktabah Syamilah -->
-                    <a href="https://shamela.ws/" target="_blank" class="quick-access-card rounded-xl p-4 flex flex-col justify-between group">
-                        <div class="space-y-2">
+                    <!-- Maktabah Syamilah Card -->
+                    <a href="https://shamela.ws/" target="_blank" class="quick-access-card rounded-2xl p-4 flex flex-col justify-between group">
+                        <div class="space-y-3">
                             <div class="flex items-center justify-between">
-                                <span class="w-9 h-9 rounded-lg bg-emerald-600/30 text-emerald-400 flex items-center justify-center font-bold text-base border border-emerald-400/40">
+                                <span class="w-10 h-10 rounded-xl bg-emerald-900/60 text-emerald-400 flex items-center justify-center font-extrabold text-lg border border-emerald-500/40">
                                     <i class="fa-solid fa-book-quran"></i>
                                 </span>
-                                <span class="text-[9px] uppercase tracking-wider font-extrabold px-2 py-0.5 rounded bg-emerald-900/60 text-emerald-300 border border-emerald-500/30">Kitab Kuning</span>
+                                <span class="text-[9px] uppercase font-extrabold px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-300 border border-emerald-700">Kitab Kuning</span>
                             </div>
-                            <h4 class="text-sm font-bold text-white group-hover:text-muhammadiyah-gold transition">Maktabah Syamilah</h4>
-                            <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed">Perpustakaan digital puluhan ribu kitab klasik fiqih, tafsir, & hadits.</p>
+                            <div>
+                                <h4 class="text-sm font-extrabold text-white group-hover:text-muhammadiyah-gold transition">Maktabah Syamilah</h4>
+                                <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed mt-1">Puluhan ribu kitab fiqih, tafsir, & hadits.</p>
+                            </div>
                         </div>
-                        <div class="mt-3 pt-2 border-t border-white/10 flex items-center justify-between text-[11px] text-muhammadiyah-gold font-bold">
-                            <span>Buka shamela.ws</span>
+                        <div class="mt-4 pt-2 border-t border-white/10 flex items-center justify-between text-[11px] text-muhammadiyah-gold font-bold">
+                            <span>shamela.ws</span>
                             <i class="fa-solid fa-arrow-up-right-from-square group-hover:translate-x-0.5 transition"></i>
                         </div>
                     </a>
 
-                    <!-- Quick Card 4: Perpusnas RI -->
-                    <a href="https://perpusnas.go.id/" target="_blank" class="quick-access-card rounded-xl p-4 flex flex-col justify-between group">
-                        <div class="space-y-2">
+                    <!-- Maktabah Waqfeya Card -->
+                    <a href="https://waqfeya.net/" target="_blank" class="quick-access-card rounded-2xl p-4 flex flex-col justify-between group">
+                        <div class="space-y-3">
                             <div class="flex items-center justify-between">
-                                <span class="w-9 h-9 rounded-lg bg-amber-600/30 text-amber-400 flex items-center justify-center font-bold text-base border border-amber-400/40">
-                                    <i class="fa-solid fa-building-columns"></i>
-                                </span>
-                                <span class="text-[9px] uppercase tracking-wider font-extrabold px-2 py-0.5 rounded bg-amber-900/60 text-amber-300 border border-amber-500/30">Nasional RI</span>
-                            </div>
-                            <h4 class="text-sm font-bold text-white group-hover:text-muhammadiyah-gold transition">Perpusnas RI</h4>
-                            <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed">Portal resmi Perpustakaan Nasional Republik Indonesia & e-Pusnas.</p>
-                        </div>
-                        <div class="mt-3 pt-2 border-t border-white/10 flex items-center justify-between text-[11px] text-muhammadiyah-gold font-bold">
-                            <span>Buka perpusnas.go.id</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square group-hover:translate-x-0.5 transition"></i>
-                        </div>
-                    </a>
-
-                    <!-- Quick Card 5: Maktabah Waqfeya -->
-                    <a href="https://waqfeya.net/" target="_blank" class="quick-access-card rounded-xl p-4 flex flex-col justify-between group">
-                        <div class="space-y-2">
-                            <div class="flex items-center justify-between">
-                                <span class="w-9 h-9 rounded-lg bg-red-600/30 text-red-400 flex items-center justify-center font-bold text-base border border-red-400/40">
+                                <span class="w-10 h-10 rounded-xl bg-red-900/60 text-red-400 flex items-center justify-center font-extrabold text-lg border border-red-500/40">
                                     <i class="fa-solid fa-box-archive"></i>
                                 </span>
-                                <span class="text-[9px] uppercase tracking-wider font-extrabold px-2 py-0.5 rounded bg-red-900/60 text-red-300 border border-red-500/30">Scan PDF Kitab</span>
+                                <span class="text-[9px] uppercase font-extrabold px-2 py-0.5 rounded-full bg-red-950 text-red-300 border border-red-700">PDF Kitab</span>
                             </div>
-                            <h4 class="text-sm font-bold text-white group-hover:text-muhammadiyah-gold transition">Maktabah Waqfeya</h4>
-                            <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed">Repositori raksasa scan naskah asli kitab turats mu'tabar PDF.</p>
+                            <div>
+                                <h4 class="text-sm font-extrabold text-white group-hover:text-muhammadiyah-gold transition">Maktabah Waqfeya</h4>
+                                <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed mt-1">Scan naskah asli kitab turats PDF.</p>
+                            </div>
                         </div>
-                        <div class="mt-3 pt-2 border-t border-white/10 flex items-center justify-between text-[11px] text-muhammadiyah-gold font-bold">
-                            <span>Buka waqfeya.net</span>
+                        <div class="mt-4 pt-2 border-t border-white/10 flex items-center justify-between text-[11px] text-muhammadiyah-gold font-bold">
+                            <span>waqfeya.net</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square group-hover:translate-x-0.5 transition"></i>
+                        </div>
+                    </a>
+
+                    <!-- Perpusnas Card -->
+                    <a href="https://perpusnas.go.id/" target="_blank" class="quick-access-card rounded-2xl p-4 flex flex-col justify-between group">
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="w-10 h-10 rounded-xl bg-amber-900/60 text-amber-400 flex items-center justify-center font-extrabold text-lg border border-amber-500/40">
+                                    <i class="fa-solid fa-building-columns"></i>
+                                </span>
+                                <span class="text-[9px] uppercase font-extrabold px-2 py-0.5 rounded-full bg-amber-950 text-amber-300 border border-amber-700">Nasional</span>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-extrabold text-white group-hover:text-muhammadiyah-gold transition">Perpusnas RI</h4>
+                                <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed mt-1">Perpustakaan Nasional Republik Indonesia.</p>
+                            </div>
+                        </div>
+                        <div class="mt-4 pt-2 border-t border-white/10 flex items-center justify-between text-[11px] text-muhammadiyah-gold font-bold">
+                            <span>perpusnas.go.id</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square group-hover:translate-x-0.5 transition"></i>
+                        </div>
+                    </a>
+
+                    <!-- Pustaka Kemenag Card -->
+                    <a href="https://pustakadigital.kemenag.go.id" target="_blank" class="quick-access-card rounded-2xl p-4 flex flex-col justify-between group">
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="w-10 h-10 rounded-xl bg-teal-900/60 text-teal-400 flex items-center justify-center font-extrabold text-lg border border-teal-500/40">
+                                    <i class="fa-solid fa-kaaba"></i>
+                                </span>
+                                <span class="text-[9px] uppercase font-extrabold px-2 py-0.5 rounded-full bg-teal-950 text-teal-300 border border-teal-700">Kemenag</span>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-extrabold text-white group-hover:text-muhammadiyah-gold transition">Pustaka Kemenag</h4>
+                                <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed mt-1">Buku teks pelajaran Madrasah resmi.</p>
+                            </div>
+                        </div>
+                        <div class="mt-4 pt-2 border-t border-white/10 flex items-center justify-between text-[11px] text-muhammadiyah-gold font-bold">
+                            <span>kemenag.go.id</span>
                             <i class="fa-solid fa-arrow-up-right-from-square group-hover:translate-x-0.5 transition"></i>
                         </div>
                     </a>
@@ -432,70 +466,65 @@
                 </div>
             </div>
 
-            <!-- TAB NAVIGATION BUTTONS -->
-            <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2 border-b border-white/10 pb-4">
-                <button onclick="switchTab('catalog')" id="tab-btn-catalog" class="tab-btn px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition flex items-center gap-2 bg-agam text-white border border-muhammadiyah-gold/40 shadow-lg">
+            <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2 border-b border-amber-500/20 pb-4">
+                <button onclick="switchTab('catalog')" id="tab-btn-catalog" class="tab-btn px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition flex items-center gap-2 bg-gradient-to-r from-amber-400 to-yellow-500 text-slate-950 shadow-lg shadow-amber-500/20">
                     <i class="fa-solid fa-book-open"></i> Katalog Buku MTs & Islam
                 </button>
-                <button onclick="switchTab('portals')" id="tab-btn-portals" class="tab-btn px-5 py-2.5 rounded-xl font-semibold text-xs sm:text-sm text-slate-300 hover:text-white hover:bg-white/10 transition flex items-center gap-2 border border-transparent">
-                    <i class="fa-solid fa-globe"></i> Direktori Perpustakaan Dunia
+                <button onclick="switchTab('portals')" id="tab-btn-portals" class="tab-btn px-5 py-2.5 rounded-xl font-semibold text-xs sm:text-sm text-slate-300 hover:text-white hover:bg-slate-900 transition flex items-center gap-2 border border-transparent">
+                    <i class="fa-solid fa-globe"></i> Direktori Library Dunia
                 </button>
-                <button onclick="switchTab('media')" id="tab-btn-media" class="tab-btn px-5 py-2.5 rounded-xl font-semibold text-xs sm:text-sm text-slate-300 hover:text-white hover:bg-white/10 transition flex items-center gap-2 border border-transparent">
-                    <i class="fa-solid fa-circle-play text-red-500"></i> Kajian Agama YouTube
+                <button onclick="switchTab('media')" id="tab-btn-media" class="tab-btn px-5 py-2.5 rounded-xl font-semibold text-xs sm:text-sm text-slate-300 hover:text-white hover:bg-slate-900 transition flex items-center gap-2 border border-transparent">
+                    <i class="fa-solid fa-circle-play text-red-500"></i> Ceramah & Kajian Agama
                 </button>
-                <button onclick="switchTab('logs')" id="tab-btn-logs" class="tab-btn px-5 py-2.5 rounded-xl font-semibold text-xs sm:text-sm text-slate-300 hover:text-white hover:bg-white/10 transition flex items-center gap-2 border border-transparent">
-                    <i class="fa-solid fa-list-check"></i> Log Real-Time Pengunjung
+                <button onclick="switchTab('logs')" id="tab-btn-logs" class="tab-btn px-5 py-2.5 rounded-xl font-semibold text-xs sm:text-sm text-slate-300 hover:text-white hover:bg-slate-900 transition flex items-center gap-2 border border-transparent">
+                    <i class="fa-solid fa-list-check"></i> Log Pengunjung Real-Time
                 </button>
             </div>
 
-            <!-- TAB CONTENT 1: E-BOOK CATALOG -->
             <div id="tab-content-catalog" class="tab-pane space-y-6">
                 
-                <!-- Search & Category Filter Bar -->
-                <div class="glass-panel p-4 rounded-xl flex flex-col md:flex-row items-center justify-between gap-4">
-                    <!-- Search Input -->
+                <!-- Search & Category Filters -->
+                <div class="glass-panel p-4 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4">
                     <div class="relative w-full md:w-96">
-                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
-                        <input type="text" id="book-search" oninput="filterBooks()" placeholder="Cari judul buku, pengarang, topik..." 
-                            class="w-full bg-slate-900/90 border border-white/15 rounded-lg pl-10 pr-4 py-2 text-sm text-white focus:outline-none focus:border-muhammadiyah-gold">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                        <input type="text" id="book-search" oninput="filterBooks()" placeholder="Cari judul buku, pengarang, atau topik..." 
+                            class="w-full bg-slate-950 border border-amber-500/30 rounded-xl pl-10 pr-4 py-2 text-sm text-white focus:outline-none focus:border-muhammadiyah-gold">
                     </div>
 
-                    <!-- Category Pills -->
                     <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
-                        <button onclick="setCategoryFilter('all')" class="cat-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-muhammadiyah-gold text-slate-950 border border-muhammadiyah-gold">Semua</button>
-                        <button onclick="setCategoryFilter('mts')" class="cat-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 border border-white/10">Buku Siswa MTs</button>
-                        <button onclick="setCategoryFilter('guru')" class="cat-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 border border-white/10">Panduan Guru</button>
-                        <button onclick="setCategoryFilter('kemuhammadiyahan')" class="cat-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 border border-white/10">Kemuhammadiyahan</button>
-                        <button onclick="setCategoryFilter('kitab')" class="cat-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 border border-white/10">Turats / Kitab</button>
-                        <button onclick="setCategoryFilter('favorit')" class="cat-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 border border-white/10"><i class="fa-solid fa-heart text-red-500"></i> Favorit</button>
+                        <button onclick="setCategoryFilter('all')" class="cat-filter-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-amber-400 text-slate-950 border border-amber-300">Semua</button>
+                        <button onclick="setCategoryFilter('mts')" class="cat-filter-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-900 text-slate-300 hover:bg-slate-800 border border-white/10">Buku Siswa MTs</button>
+                        <button onclick="setCategoryFilter('guru')" class="cat-filter-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-900 text-slate-300 hover:bg-slate-800 border border-white/10">Panduan Guru</button>
+                        <button onclick="setCategoryFilter('kemuhammadiyahan')" class="cat-filter-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-900 text-slate-300 hover:bg-slate-800 border border-white/10">Kemuhammadiyahan</button>
+                        <button onclick="setCategoryFilter('kitab')" class="cat-filter-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-900 text-slate-300 hover:bg-slate-800 border border-white/10">Kitab Turats</button>
+                        <button onclick="setCategoryFilter('favorit')" class="cat-filter-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-900 text-slate-300 hover:bg-slate-800 border border-white/10"><i class="fa-solid fa-heart text-red-500"></i> Favorit</button>
                     </div>
                 </div>
 
-                <!-- Book Cards Grid -->
+                <!-- Books Grid Container -->
                 <div id="books-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    <!-- Books rendered dynamically by JS -->
+                    <!-- Dynamic rendering by JS -->
                 </div>
             </div>
 
-            <!-- TAB CONTENT 2: WORLD & NATIONAL LIBRARY PORTALS -->
             <div id="tab-content-portals" class="tab-pane hidden space-y-6">
                 <div class="text-center max-w-2xl mx-auto space-y-2 mb-8">
-                    <h3 class="text-xl md:text-2xl font-bold text-white">Direktori Perpustakaan Digital Terkemuka</h3>
+                    <h3 class="text-xl md:text-2xl font-extrabold text-white">Direktori Perpustakaan Digital Terkemuka</h3>
                     <p class="text-xs md:text-sm text-slate-300">
-                        Akses jaringan khazanah ilmu nasional dan internasional terpercaya, termasuk perpustakaan digital global dan kitab klasik Islam.
+                        Khazanah ilmu pengetahuan nasional dan internasional terpercaya, termasuk jurnal, repositori digital global, dan perpustakaan naskah klasik Islam.
                     </p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     
-                    <!-- WeLib Portal Card -->
-                    <div class="glass-card rounded-2xl p-6 border border-white/15 hover:border-muhammadiyah-gold flex flex-col justify-between space-y-4 relative group">
+                    <!-- WeLib Card -->
+                    <div class="glass-card rounded-2xl p-6 border border-amber-500/20 hover:border-amber-400 flex flex-col justify-between space-y-4 group">
                         <div class="space-y-3">
                             <div class="flex items-center justify-between">
                                 <div class="w-12 h-12 rounded-xl bg-blue-900/60 border border-blue-500/40 flex items-center justify-center text-blue-400 text-2xl font-bold">
                                     <i class="fa-solid fa-globe"></i>
                                 </div>
-                                <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-blue-950 text-blue-300 border border-blue-800">
+                                <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-blue-950 text-blue-300 border border-blue-700">
                                     Global Digital
                                 </span>
                             </div>
@@ -504,20 +533,20 @@
                                 Platform perpustakaan digital internasional interaktif yang menyediakan koleksi literatur multi-disiplin ilmu secara instan.
                             </p>
                         </div>
-                        <a href="https://welib.org/" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-blue-800/80 hover:bg-blue-700 text-white font-semibold text-xs text-center border border-blue-500/30 transition flex items-center justify-center gap-2">
+                        <a href="https://welib.org/" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-blue-900/80 hover:bg-blue-800 text-white font-semibold text-xs text-center border border-blue-500/40 transition flex items-center justify-center gap-2 shadow">
                             <span>Akses Portal WeLib</span>
                             <i class="fa-solid fa-arrow-up-right-from-square"></i>
                         </a>
                     </div>
 
                     <!-- F15 Library Card -->
-                    <div class="glass-card rounded-2xl p-6 border border-white/15 hover:border-muhammadiyah-gold flex flex-col justify-between space-y-4 relative group">
+                    <div class="glass-card rounded-2xl p-6 border border-amber-500/20 hover:border-amber-400 flex flex-col justify-between space-y-4 group">
                         <div class="space-y-3">
                             <div class="flex items-center justify-between">
                                 <div class="w-12 h-12 rounded-xl bg-purple-900/60 border border-purple-500/40 flex items-center justify-center text-purple-400 text-2xl font-bold">
                                     <i class="fa-solid fa-book-atlas"></i>
                                 </div>
-                                <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-purple-950 text-purple-300 border border-purple-800">
+                                <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-purple-950 text-purple-300 border border-purple-700">
                                     Repositori Modern
                                 </span>
                             </div>
@@ -526,20 +555,20 @@
                                 Portal perpustakaan digital yang menyajikan katalog referensi buku, jurnal, dan naskah ilmiah digital terkini.
                             </p>
                         </div>
-                        <a href="https://f15library.com/" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-purple-800/80 hover:bg-purple-700 text-white font-semibold text-xs text-center border border-purple-500/30 transition flex items-center justify-center gap-2">
+                        <a href="https://f15library.com/" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-purple-900/80 hover:bg-purple-800 text-white font-semibold text-xs text-center border border-purple-500/40 transition flex items-center justify-center gap-2 shadow">
                             <span>Akses Portal F15</span>
                             <i class="fa-solid fa-arrow-up-right-from-square"></i>
                         </a>
                     </div>
 
-                    <!-- Maktabah Syamilah -->
-                    <div class="glass-card rounded-2xl p-6 border border-white/15 hover:border-muhammadiyah-gold flex flex-col justify-between space-y-4 relative group">
+                    <!-- Maktabah Syamilah Card -->
+                    <div class="glass-card rounded-2xl p-6 border border-amber-500/20 hover:border-amber-400 flex flex-col justify-between space-y-4 group">
                         <div class="space-y-3">
                             <div class="flex items-center justify-between">
                                 <div class="w-12 h-12 rounded-xl bg-emerald-900/60 border border-emerald-500/40 flex items-center justify-center text-emerald-400 text-2xl font-bold">
                                     <i class="fa-solid fa-book-quran"></i>
                                 </div>
-                                <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-emerald-950 text-emerald-300 border border-emerald-800">
+                                <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-emerald-950 text-emerald-300 border border-emerald-700">
                                     Dunia Islam
                                 </span>
                             </div>
@@ -548,20 +577,20 @@
                                 Perpustakaan digital kitab kuning terbesar berisi puluhan ribu kitab fiqih, tafsir, hadits, aqidah, dan sejarah Islam.
                             </p>
                         </div>
-                        <a href="https://shamela.ws" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-emerald-800/80 hover:bg-emerald-700 text-white font-semibold text-xs text-center border border-emerald-500/30 transition flex items-center justify-center gap-2">
+                        <a href="https://shamela.ws" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-emerald-900/80 hover:bg-emerald-800 text-white font-semibold text-xs text-center border border-emerald-500/40 transition flex items-center justify-center gap-2 shadow">
                             <span>Buka Portal Syamilah</span>
                             <i class="fa-solid fa-arrow-up-right-from-square"></i>
                         </a>
                     </div>
 
-                    <!-- e-Pusnas / Perpusnas RI -->
-                    <div class="glass-card rounded-2xl p-6 border border-white/15 hover:border-muhammadiyah-gold flex flex-col justify-between space-y-4 relative group">
+                    <!-- Perpusnas RI Card -->
+                    <div class="glass-card rounded-2xl p-6 border border-amber-500/20 hover:border-amber-400 flex flex-col justify-between space-y-4 group">
                         <div class="space-y-3">
                             <div class="flex items-center justify-between">
                                 <div class="w-12 h-12 rounded-xl bg-amber-900/60 border border-amber-500/40 flex items-center justify-center text-amber-400 text-2xl font-bold">
                                     <i class="fa-solid fa-building-columns"></i>
                                 </div>
-                                <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-amber-950 text-amber-300 border border-amber-800">
+                                <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-amber-950 text-amber-300 border border-amber-700">
                                     Nasional RI
                                 </span>
                             </div>
@@ -570,20 +599,20 @@
                                 Layanan perpustakaan digital resmi RI dengan koleksi ratusan ribu judul buku elektronik dan jurnal ilmiah gratis.
                             </p>
                         </div>
-                        <a href="https://perpusnas.go.id" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-amber-800/80 hover:bg-amber-700 text-white font-semibold text-xs text-center border border-amber-500/30 transition flex items-center justify-center gap-2">
+                        <a href="https://perpusnas.go.id" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-amber-900/80 hover:bg-amber-800 text-white font-semibold text-xs text-center border border-amber-500/40 transition flex items-center justify-center gap-2 shadow">
                             <span>Buka Perpusnas RI</span>
                             <i class="fa-solid fa-arrow-up-right-from-square"></i>
                         </a>
                     </div>
 
-                    <!-- Maktabah Waqfeya -->
-                    <div class="glass-card rounded-2xl p-6 border border-white/15 hover:border-muhammadiyah-gold flex flex-col justify-between space-y-4 relative group">
+                    <!-- Maktabah Waqfeya Card -->
+                    <div class="glass-card rounded-2xl p-6 border border-amber-500/20 hover:border-amber-400 flex flex-col justify-between space-y-4 group">
                         <div class="space-y-3">
                             <div class="flex items-center justify-between">
                                 <div class="w-12 h-12 rounded-xl bg-red-900/60 border border-red-500/40 flex items-center justify-center text-red-400 text-2xl font-bold">
                                     <i class="fa-solid fa-box-archive"></i>
                                 </div>
-                                <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-red-950 text-red-300 border border-red-800">
+                                <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-red-950 text-red-300 border border-red-700">
                                     Arsip PDF Kitab
                                 </span>
                             </div>
@@ -592,20 +621,20 @@
                                 Repositori berkas scan PDF asli kitab-kitab turats mu'tabar lengkap dengan tahqiq dari naskah manuskrip langka.
                             </p>
                         </div>
-                        <a href="https://waqfeya.net" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-red-800/80 hover:bg-red-700 text-white font-semibold text-xs text-center border border-red-500/30 transition flex items-center justify-center gap-2">
+                        <a href="https://waqfeya.net" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-red-900/80 hover:bg-red-800 text-white font-semibold text-xs text-center border border-red-500/40 transition flex items-center justify-center gap-2 shadow">
                             <span>Buka Portal Waqfeya</span>
                             <i class="fa-solid fa-arrow-up-right-from-square"></i>
                         </a>
                     </div>
 
-                    <!-- Pustaka Kemenag -->
-                    <div class="glass-card rounded-2xl p-6 border border-white/15 hover:border-muhammadiyah-gold flex flex-col justify-between space-y-4 relative group">
+                    <!-- Pustaka Kemenag Card -->
+                    <div class="glass-card rounded-2xl p-6 border border-amber-500/20 hover:border-amber-400 flex flex-col justify-between space-y-4 group">
                         <div class="space-y-3">
                             <div class="flex items-center justify-between">
                                 <div class="w-12 h-12 rounded-xl bg-teal-900/60 border border-teal-500/40 flex items-center justify-center text-teal-400 text-2xl font-bold">
                                     <i class="fa-solid fa-kaaba"></i>
                                 </div>
-                                <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-teal-950 text-teal-300 border border-teal-800">
+                                <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-teal-950 text-teal-300 border border-teal-700">
                                     Kemenag RI
                                 </span>
                             </div>
@@ -614,7 +643,7 @@
                                 Pusat buku teks pelajaran Madrasah (MTs/MA/MI), Kurikulum Merdeka Kemenag, serta riset studi Islam.
                             </p>
                         </div>
-                        <a href="https://pustakadigital.kemenag.go.id" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-teal-800/80 hover:bg-teal-700 text-white font-semibold text-xs text-center border border-teal-500/30 transition flex items-center justify-center gap-2">
+                        <a href="https://pustakadigital.kemenag.go.id" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-teal-900/80 hover:bg-teal-800 text-white font-semibold text-xs text-center border border-teal-500/40 transition flex items-center justify-center gap-2 shadow">
                             <span>Akses Pustaka Kemenag</span>
                             <i class="fa-solid fa-arrow-up-right-from-square"></i>
                         </a>
@@ -623,100 +652,94 @@
                 </div>
             </div>
 
-            <!-- TAB CONTENT 3: ISLAMIC LECTURES & MEDIA -->
             <div id="tab-content-media" class="tab-pane hidden space-y-6">
                 <div class="text-center max-w-2xl mx-auto space-y-2 mb-8">
-                    <h3 class="text-xl md:text-2xl font-bold text-white">Media Ceramah & Kajian Agama</h3>
+                    <h3 class="text-xl md:text-2xl font-extrabold text-white">Media Ceramah & Kajian Agama Islam</h3>
                     <p class="text-xs md:text-sm text-slate-300">
-                        Kumpulan ceramah, pembahasan HPT Muhammadiyah, ilmu tajwid, dan kajian mencerahkan untuk warga MTsS Muhammadiyah Baringin.
+                        Kumpulan kajian Tarjih Muhammadiyah, pembahasan fiqih ibadah, sejarah Islam Kab. Agam, dan motivasi menuntut ilmu.
                     </p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     
-                    <!-- Video 1 -->
-                    <div class="glass-card rounded-2xl overflow-hidden border border-white/15 flex flex-col justify-between">
+                    <div class="glass-card rounded-2xl overflow-hidden border border-amber-500/20 flex flex-col justify-between">
                         <div class="relative">
                             <img src="https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?auto=format&fit=crop&w=600&q=80" class="w-full h-44 object-cover">
-                            <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                            <div class="absolute inset-0 bg-black/50 flex items-center justify-center">
                                 <button onclick="playYoutubeModal('https://www.youtube.com/embed/videoseries?list=PL_T-0aT3K_01234')" class="w-12 h-12 rounded-full bg-agam text-white text-xl flex items-center justify-center shadow-lg hover:scale-110 transition">
                                     <i class="fa-solid fa-play ml-1"></i>
                                 </button>
                             </div>
-                            <span class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-black/80 text-[10px] text-white font-mono">Tarjih Muhammadiyah</span>
+                            <span class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-slate-950/90 text-[10px] text-amber-300 font-mono">Tarjih Muhammadiyah</span>
                         </div>
                         <div class="p-4 space-y-2">
                             <span class="text-[10px] font-bold text-muhammadiyah-gold uppercase">Majelis Tarjih & Tajdid</span>
                             <h4 class="text-sm font-bold text-white line-clamp-2">Kajian Himpunan Putusan Tarjih (HPT): Tuntunan Shalat Khusyu' Sesuai Sunnah</h4>
-                            <p class="text-xs text-slate-400">Narasumber: Majelis Tarjih PP Muhammadiyah</p>
+                            <p class="text-xs text-slate-400">Penceramah: Majelis Tarjih PP Muhammadiyah</p>
                         </div>
                     </div>
 
-                    <!-- Video 2 -->
-                    <div class="glass-card rounded-2xl overflow-hidden border border-white/15 flex flex-col justify-between">
+                    <div class="glass-card rounded-2xl overflow-hidden border border-amber-500/20 flex flex-col justify-between">
                         <div class="relative">
                             <img src="https://images.unsplash.com/photo-1542816417-0983cbe82752?auto=format&fit=crop&w=600&q=80" class="w-full h-44 object-cover">
-                            <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                            <div class="absolute inset-0 bg-black/50 flex items-center justify-center">
                                 <button onclick="playYoutubeModal('https://www.youtube.com/embed/videoseries?list=PL_T-0aT3K_01234')" class="w-12 h-12 rounded-full bg-agam text-white text-xl flex items-center justify-center shadow-lg hover:scale-110 transition">
                                     <i class="fa-solid fa-play ml-1"></i>
                                 </button>
                             </div>
-                            <span class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-black/80 text-[10px] text-white font-mono">Sejarah Minang</span>
+                            <span class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-slate-950/90 text-[10px] text-amber-300 font-mono">Sejarah Minang</span>
                         </div>
                         <div class="p-4 space-y-2">
                             <span class="text-[10px] font-bold text-islamic-green uppercase">Sejarah Islam Agam</span>
                             <h4 class="text-sm font-bold text-white line-clamp-2">Jejak Perjuangan Muhammadiyah & Ulama Besar di Kab. Agam Minangkabau</h4>
-                            <p class="text-xs text-slate-400">Narasumber: Lembaga Pustaka & Informasi Agam</p>
+                            <p class="text-xs text-slate-400">Pustaka & Dokumentasi Sejarah Agam</p>
                         </div>
                     </div>
 
-                    <!-- Video 3 -->
-                    <div class="glass-card rounded-2xl overflow-hidden border border-white/15 flex flex-col justify-between">
+                    <div class="glass-card rounded-2xl overflow-hidden border border-amber-500/20 flex flex-col justify-between">
                         <div class="relative">
                             <img src="https://images.unsplash.com/photo-1590076175571-4b5459efb08c?auto=format&fit=crop&w=600&q=80" class="w-full h-44 object-cover">
-                            <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                            <div class="absolute inset-0 bg-black/50 flex items-center justify-center">
                                 <button onclick="playYoutubeModal('https://www.youtube.com/embed/videoseries?list=PL_T-0aT3K_01234')" class="w-12 h-12 rounded-full bg-agam text-white text-xl flex items-center justify-center shadow-lg hover:scale-110 transition">
                                     <i class="fa-solid fa-play ml-1"></i>
                                 </button>
                             </div>
-                            <span class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-black/80 text-[10px] text-white font-mono">Motivasi MTs</span>
+                            <span class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-slate-950/90 text-[10px] text-amber-300 font-mono">Adab Santri</span>
                         </div>
                         <div class="p-4 space-y-2">
                             <span class="text-[10px] font-bold text-blue-400 uppercase">Kajian Tematik Pelajar</span>
                             <h4 class="text-sm font-bold text-white line-clamp-2">Adab Menuntut Ilmu Menurut Kitab Adabul 'Alim Wal Muta'allim</h4>
-                            <p class="text-xs text-slate-400">Pustaka Islami Remaja Baringin</p>
+                            <p class="text-xs text-slate-400">Kajian Remaja Masjid Baringin</p>
                         </div>
                     </div>
 
                 </div>
             </div>
 
-            <!-- TAB CONTENT 4: VISITOR REALTIME LOG & GOOGLE SHEET CONTROL -->
             <div id="tab-content-logs" class="tab-pane hidden space-y-6">
                 
                 <div class="glass-panel p-6 rounded-2xl space-y-6">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-4">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-amber-500/20 pb-4">
                         <div>
                             <h3 class="text-lg font-bold text-white flex items-center gap-2">
                                 <i class="fa-solid fa-clock-rotate-left text-muhammadiyah-gold"></i> Rekap Log Pengunjung Real-Time
                             </h3>
-                            <p class="text-xs text-slate-400">Tercatat secara otomatis di sistem lokal dan Google Sheets Webhook</p>
+                            <p class="text-xs text-slate-400">Tercatat secara otomatis di sistem lokal dan tersinkronkan ke Google Sheets</p>
                         </div>
 
                         <div class="flex items-center gap-3">
-                            <button onclick="exportVisitorCSV()" class="px-3.5 py-2 rounded-lg bg-emerald-700 hover:bg-emerald-600 text-xs font-bold text-white transition flex items-center gap-2 shadow">
+                            <button onclick="exportVisitorCSV()" class="px-3.5 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-xs font-bold text-white transition flex items-center gap-2 shadow">
                                 <i class="fa-solid fa-file-excel"></i> Ekspor CSV
                             </button>
-                            <button onclick="clearVisitorLog()" class="px-3.5 py-2 rounded-lg bg-red-950/80 hover:bg-red-900 text-xs font-bold text-red-300 border border-red-800 transition">
+                            <button onclick="clearVisitorLog()" class="px-3.5 py-2 rounded-xl bg-red-950 hover:bg-red-900 text-xs font-bold text-red-300 border border-red-800 transition">
                                 <i class="fa-solid fa-trash-can"></i> Hapus Log
                             </button>
                         </div>
                     </div>
 
-                    <!-- Log Table -->
                     <div class="overflow-x-auto">
                         <table class="w-full text-left text-xs text-slate-300">
-                            <thead class="bg-slate-900/90 text-slate-200 uppercase font-semibold text-[11px] border-b border-white/10">
+                            <thead class="bg-slate-950 text-amber-200 uppercase font-semibold text-[11px] border-b border-amber-500/20">
                                 <tr>
                                     <th class="px-4 py-3">Waktu Masuk</th>
                                     <th class="px-4 py-3">Nama Pengunjung</th>
@@ -739,11 +762,12 @@
 
     </main>
 
-    <!-- E-BOOK READER MODAL -->
+    
+    <!-- E-BOOK READER SIMULATOR MODAL -->
     <div id="reader-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-2 sm:p-4">
-        <div class="glass-panel w-full max-w-5xl h-[90vh] rounded-2xl border border-white/20 flex flex-col overflow-hidden">
+        <div class="glass-panel w-full max-w-5xl h-[90vh] rounded-2xl border border-amber-500/30 flex flex-col overflow-hidden">
             <!-- Modal Header -->
-            <div class="p-4 bg-slate-900/90 border-b border-white/10 flex items-center justify-between">
+            <div class="p-4 bg-slate-950 border-b border-amber-500/20 flex items-center justify-between">
                 <div class="flex items-center gap-3">
                     <i class="fa-solid fa-book-open-reader text-muhammadiyah-gold text-xl"></i>
                     <div>
@@ -752,32 +776,32 @@
                     </div>
                 </div>
                 <div class="flex items-center gap-2">
-                    <button onclick="toggleSpeech()" id="speech-btn" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 border border-white/10 flex items-center gap-1.5">
-                        <i class="fa-solid fa-volume-high text-muhammadiyah-gold"></i>
+                    <button onclick="toggleSpeech()" id="speech-btn" class="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-500 text-slate-950 text-xs font-extrabold flex items-center gap-1.5 shadow">
+                        <i class="fa-solid fa-volume-high"></i>
                         <span>Baca Suara</span>
                     </button>
-                    <button onclick="closeReaderModal()" class="w-8 h-8 rounded-lg bg-red-900/60 hover:bg-red-800 text-white flex items-center justify-center">
+                    <button onclick="closeReaderModal()" class="w-8 h-8 rounded-xl bg-red-950 hover:bg-red-800 text-white flex items-center justify-center border border-red-800">
                         <i class="fa-solid fa-xmark"></i>
                     </button>
                 </div>
             </div>
 
-            <!-- Reader Body Simulation -->
+            <!-- Reader Content Box -->
             <div class="flex-grow p-6 overflow-y-auto bg-slate-950 text-slate-200 space-y-6 font-serif leading-relaxed text-sm md:text-base" id="reader-content">
-                <!-- Dynamic Book Content Text -->
+                <!-- Text loaded dynamically -->
             </div>
 
-            <!-- Reader Footer Bar -->
-            <div class="p-3 bg-slate-900/90 border-t border-white/10 flex items-center justify-between text-xs text-slate-400">
+            <!-- Reader Footer -->
+            <div class="p-3 bg-slate-950 border-t border-amber-500/20 flex items-center justify-between text-xs text-slate-400">
                 <span>Perpustakaan Digital MTsS Muhammadiyah Baringin</span>
-                <span class="font-mono">Simulator Pembaca Digital</span>
+                <span class="font-mono">Text-To-Speech Interactive Reader</span>
             </div>
         </div>
     </div>
 
-    <!-- YOUTUBE VIDEO MODAL -->
+    <!-- YOUTUBE MODAL -->
     <div id="youtube-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4">
-        <div class="glass-panel w-full max-w-3xl rounded-2xl border border-white/20 overflow-hidden relative">
+        <div class="glass-panel w-full max-w-3xl rounded-2xl border border-amber-500/30 overflow-hidden relative">
             <button onclick="closeYoutubeModal()" class="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-black/80 text-white flex items-center justify-center hover:bg-red-600 transition">
                 <i class="fa-solid fa-xmark"></i>
             </button>
@@ -789,10 +813,10 @@
 
     <!-- GOOGLE SHEET CONFIG MODAL -->
     <div id="sheet-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
-        <div class="glass-panel w-full max-w-lg rounded-2xl border border-white/20 p-6 space-y-4">
-            <div class="flex items-center justify-between border-b border-white/10 pb-3">
+        <div class="glass-panel w-full max-w-lg rounded-2xl border border-amber-500/30 p-6 space-y-4">
+            <div class="flex items-center justify-between border-b border-amber-500/20 pb-3">
                 <h3 class="text-base font-bold text-white flex items-center gap-2">
-                    <i class="fa-solid fa-file-csv text-green-400"></i> Integrasi Google Sheet Real-Time
+                    <i class="fa-solid fa-file-csv text-emerald-400"></i> Integrasi Google Sheet Real-Time
                 </h3>
                 <button onclick="closeSheetConfigModal()" class="text-slate-400 hover:text-white">
                     <i class="fa-solid fa-xmark"></i>
@@ -800,19 +824,18 @@
             </div>
 
             <p class="text-xs text-slate-300 leading-relaxed">
-                Masukkan URL WebApp Google Apps Script Anda agar setiap tamu/pengunjung yang check-in dikirimkan datanya secara otomatis ke Google Sheet perpustakaan.
+                Masukkan URL WebApp Google Apps Script Anda agar data pengunjung dikirimkan secara langsung ke Google Sheet perpustakaan.
             </p>
 
             <div>
-                <label class="block text-xs font-semibold text-slate-300 mb-1">URL Google Apps Script Webhook</label>
-                <input type="url" id="sheet-url-input" placeholder="https://script.google.com/macros/s/.../exec" 
-                    class="w-full bg-slate-900 border border-white/15 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-muhammadiyah-gold">
+                <label class="block text-xs font-semibold text-amber-200 mb-1">URL Google Apps Script Webhook</label>
+                <input type="url" id="sheet-url-input" placeholder="https://script.google.com/macros/s/AKfycbz273vLN9_UTnYh-BUl6NuS4H-lE8MRMVP4K4sH9rEL7LYGeihn5CIWUz3flK4VwAH9/exec" 
+                    class="w-full bg-slate-950 border border-amber-500/30 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-muhammadiyah-gold">
             </div>
 
-            <!-- Code snippet helper -->
-            <div class="p-3 bg-slate-950 rounded-lg text-[11px] text-slate-400 font-mono space-y-1">
-                <p class="text-muhammadiyah-gold font-bold">Kode Google Apps Script (doPost):</p>
-                <pre class="overflow-x-auto p-1 bg-black/50 rounded">function doPost(e) {
+            <div class="p-3 bg-slate-950 rounded-xl text-[11px] text-slate-400 font-mono space-y-1 border border-white/10">
+                <p class="text-muhammadiyah-gold font-bold">Kode Apps Script Google Sheet (doPost):</p>
+                <pre class="overflow-x-auto p-2 bg-black/60 rounded text-[10px]">function doPost(e) {
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
   var d = JSON.parse(e.postData.contents);
   sheet.appendRow([new Date(), d.name, d.role, d.idNum, d.purpose]);
@@ -821,25 +844,24 @@
             </div>
 
             <div class="flex justify-end gap-2 pt-2">
-                <button onclick="closeSheetConfigModal()" class="px-4 py-2 rounded-lg bg-slate-800 text-xs font-semibold text-slate-300">Batal</button>
-                <button onclick="saveSheetUrl()" class="px-4 py-2 rounded-lg bg-green-700 hover:bg-green-600 text-xs font-bold text-white shadow">Simpan Integrasi</button>
+                <button onclick="closeSheetConfigModal()" class="px-4 py-2 rounded-xl bg-slate-800 text-xs font-semibold text-slate-300">Batal</button>
+                <button onclick="saveSheetUrl()" class="px-4 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-xs font-bold text-white shadow">Simpan Integrasi</button>
             </div>
         </div>
     </div>
 
     <!-- FOOTER -->
-    <footer class="border-t border-white/10 bg-slate-950/90 py-6 px-4 lg:px-8 text-center text-xs text-slate-400 mt-12">
+    <footer class="border-t border-amber-500/20 bg-slate-950/90 py-6 px-4 lg:px-8 text-center text-xs text-slate-400 mt-12">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-2">
                 <i class="fa-solid fa-star-and-crescent text-muhammadiyah-gold"></i>
-                <span class="font-semibold text-slate-200">Dedikasi oleh Dedi Efendi, S.Pd., M.PFis. (Pengawas Madrasah Kab. Agam) untuk MTsS Muhammadiyah Baringin</span>
-                <span>• Kab. Agam, Sumatera Barat</span>
+                <span class="font-extrabold text-slate-200">Dibuat oleh Dedi Efendi, S.Pd.,M.PFis. untuk MTsS Muhammadiyah Baringin</span>
+                <span>• Kecamatan Palembayan Kab. Agam, Sumatera Barat</span>
             </div>
             <p>© 2026 Perpustakaan Digital Berkemajuan. Presisi, Prestisius, & Islami.</p>
         </div>
     </footer>
 
-    <!-- JAVASCRIPT APP LOGIC -->
     <script>
         const booksData = [
             {
@@ -874,7 +896,7 @@
             },
             {
                 id: 4,
-                title: "Matan Matn Al-Ghayah wa Ar-Raghbah (Abu Syuja')",
+                title: "Matan Al-Ghayah wa Ar-Raghbah (Abu Syuja')",
                 author: "Al-Qadhi Abu Syuja' Ahmad bin Al-Hasan",
                 category: "kitab",
                 rating: 4.9,
@@ -919,8 +941,8 @@
             
             if(googleSheetUrl) {
                 document.getElementById('sheet-url-input').value = googleSheetUrl;
-                document.getElementById('sheet-status-indicator').innerText = "Status: Google Sheet Terhubung";
-                document.getElementById('sheet-status-indicator').classList.add("text-green-400");
+                document.getElementById('sheet-status-indicator').innerText = "Sync: Google Sheet Terhubung";
+                document.getElementById('sheet-status-indicator').classList.add("text-emerald-400");
             }
         };
 
@@ -965,11 +987,9 @@
 
             activeVisitor = { name, role, idNum, purpose, time: timeStr };
 
-            // Save locally
             visitorLogs.unshift(activeVisitor);
             localStorage.setItem('mtss_visitor_logs', JSON.stringify(visitorLogs));
 
-            // Sync with Google Sheet Webhook if set
             if(googleSheetUrl) {
                 try {
                     fetch(googleSheetUrl, {
@@ -983,7 +1003,6 @@
                 }
             }
 
-            // Update Active UI
             document.getElementById('active-user-name').innerText = name;
             document.getElementById('active-user-role').innerText = role;
             document.getElementById('active-user-id').innerText = `ID: ${idNum}`;
@@ -993,10 +1012,10 @@
 
             Swal.fire({
                 title: 'Selamat Datang!',
-                text: `Barakallah, ${name}. Sesi kunjungan Perpustakaan Digital MTsS Muhammadiyah Baringin aktif.`,
+                text: `Barakallah, ${name}. Sesi kunjungan Anda aktif.`,
                 icon: 'success',
                 confirmButtonColor: '#C8102E',
-                background: '#1e293b',
+                background: '#0F172A',
                 color: '#fff'
             });
 
@@ -1016,13 +1035,13 @@
         function switchTab(tabId) {
             document.querySelectorAll('.tab-pane').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('bg-agam', 'text-white', 'shadow-lg');
+                btn.classList.remove('bg-gradient-to-r', 'from-amber-400', 'to-yellow-500', 'text-slate-950', 'shadow-lg');
                 btn.classList.add('text-slate-300');
             });
 
             document.getElementById(`tab-content-${tabId}`).classList.remove('hidden');
             const activeBtn = document.getElementById(`tab-btn-${tabId}`);
-            activeBtn.classList.add('bg-agam', 'text-white', 'shadow-lg');
+            activeBtn.classList.add('bg-gradient-to-r', 'from-amber-400', 'to-yellow-500', 'text-slate-950', 'shadow-lg');
             activeBtn.classList.remove('text-slate-300');
         }
 
@@ -1041,8 +1060,8 @@
             if(filtered.length === 0) {
                 grid.innerHTML = `
                     <div class="col-span-full text-center py-12 text-slate-400">
-                        <i class="fa-solid fa-book-bookmark text-4xl mb-3 text-slate-600"></i>
-                        <p>Tidak ada buku yang sesuai dengan pencarian atau filter ini.</p>
+                        <i class="fa-solid fa-book-bookmark text-4xl mb-3 text-amber-500/40"></i>
+                        <p>Tidak ada buku yang sesuai dengan filter ini.</p>
                     </div>`;
                 return;
             }
@@ -1050,29 +1069,29 @@
             filtered.forEach(book => {
                 const isFav = favorites.includes(book.id);
                 const card = document.createElement('div');
-                card.className = "glass-card rounded-2xl overflow-hidden flex flex-col justify-between border border-white/10 group relative";
+                card.className = "glass-card rounded-2xl overflow-hidden flex flex-col justify-between border border-amber-500/20 group relative";
                 card.innerHTML = `
                     <div>
-                        <div class="relative h-48 overflow-hidden bg-slate-900">
+                        <div class="relative h-48 overflow-hidden bg-slate-950">
                             <img src="${book.cover}" alt="${book.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-black/70 backdrop-blur-md text-[10px] font-bold text-muhammadiyah-gold uppercase border border-muhammadiyah-gold/30">
+                            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-slate-950/80 backdrop-blur-md text-[10px] font-extrabold text-muhammadiyah-gold uppercase border border-amber-400/40">
                                 ${book.category}
                             </span>
-                            <button onclick="toggleFavorite(${book.id})" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/70 text-sm flex items-center justify-center transition ${isFav ? 'text-red-500' : 'text-slate-400 hover:text-white'}">
+                            <button onclick="toggleFavorite(${book.id})" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-slate-950/80 text-sm flex items-center justify-center transition ${isFav ? 'text-red-500' : 'text-slate-400 hover:text-white'}">
                                 <i class="fa-solid fa-heart"></i>
                             </button>
-                            <div class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-black/80 text-[11px] text-yellow-400 flex items-center gap-1 font-bold">
+                            <div class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-slate-950/80 text-[11px] text-yellow-400 flex items-center gap-1 font-bold">
                                 <i class="fa-solid fa-star"></i> ${book.rating}
                             </div>
                         </div>
                         <div class="p-4 space-y-2">
                             <h4 class="text-sm font-bold text-white group-hover:text-muhammadiyah-gold transition line-clamp-2">${book.title}</h4>
-                            <p class="text-xs text-slate-400 font-medium"><i class="fa-solid fa-pen-nib text-[10px]"></i> ${book.author}</p>
+                            <p class="text-xs text-amber-200/80 font-medium"><i class="fa-solid fa-pen-nib text-[10px]"></i> ${book.author}</p>
                             <p class="text-xs text-slate-300 line-clamp-2 leading-relaxed pt-1">${book.snippet}</p>
                         </div>
                     </div>
                     <div class="p-4 pt-0">
-                        <button onclick="openBookReader(${book.id})" class="w-full py-2 px-3 rounded-xl bg-slate-800 hover:bg-agam text-xs font-bold text-slate-200 hover:text-white border border-white/10 hover:border-muhammadiyah-gold transition flex items-center justify-center gap-2">
+                        <button onclick="openBookReader(${book.id})" class="w-full py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-agam text-xs font-bold text-slate-200 hover:text-white border border-amber-500/30 transition flex items-center justify-center gap-2">
                             <i class="fa-solid fa-book-open"></i> Baca E-Book
                         </button>
                     </div>
@@ -1099,10 +1118,10 @@
         function setCategoryFilter(cat) {
             currentCatFilter = cat;
             document.querySelectorAll('.cat-filter-btn').forEach(btn => {
-                btn.classList.remove('bg-muhammadiyah-gold', 'text-slate-950');
-                btn.classList.add('bg-slate-800', 'text-slate-300');
+                btn.classList.remove('bg-amber-400', 'text-slate-950', 'border-amber-300');
+                btn.classList.add('bg-slate-900', 'text-slate-300');
             });
-            event.target.classList.add('bg-muhammadiyah-gold', 'text-slate-950');
+            event.target.classList.add('bg-amber-400', 'text-slate-950', 'border-amber-300');
             renderBooks(cat, document.getElementById('book-search').value);
         }
 
@@ -1131,17 +1150,17 @@
             if(isSpeaking) {
                 speechSynth.cancel();
                 isSpeaking = false;
-                btn.innerHTML = `<i class="fa-solid fa-volume-high text-muhammadiyah-gold"></i> <span>Baca Suara</span>`;
+                btn.innerHTML = `<i class="fa-solid fa-volume-high"></i> <span>Baca Suara</span>`;
             } else {
                 const utterance = new SpeechSynthesisUtterance(currentActiveBook.content);
                 utterance.lang = 'id-ID';
                 utterance.onend = () => {
                     isSpeaking = false;
-                    btn.innerHTML = `<i class="fa-solid fa-volume-high text-muhammadiyah-gold"></i> <span>Baca Suara</span>`;
+                    btn.innerHTML = `<i class="fa-solid fa-volume-high"></i> <span>Baca Suara</span>`;
                 };
                 speechSynth.speak(utterance);
                 isSpeaking = true;
-                btn.innerHTML = `<i class="fa-solid fa-stop text-red-400"></i> <span>Hentikan</span>`;
+                btn.innerHTML = `<i class="fa-solid fa-stop text-red-950"></i> <span>Hentikan</span>`;
             }
         }
 
@@ -1175,7 +1194,8 @@
                 confirmButtonColor: '#C8102E'
             });
 
-            document.getElementById('sheet-status-indicator').innerText = url ? "Status: Google Sheet Terhubung" : "Mode: Local Data";
+            document.getElementById('sheet-status-indicator').innerText = url ? "Sync: Google Sheet Terhubung" : "Sync: Local Data";
+            if(url) document.getElementById('sheet-status-indicator').classList.add("text-emerald-400");
             closeSheetConfigModal();
         }
 
